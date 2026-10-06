@@ -44,14 +44,28 @@ async function assertWidth(page){check(await page.evaluate(()=>document.document
  check(await page.locator('#o-homes').innerText()==='96','Demo home count');
  check(await page.locator('#o-assigned').innerText()==='81','Demo assignments');
  check(await page.locator('#o-unassigned').innerText()==='15','Demo unassigned units');
- check(await page.locator('#m-canvas .mlot').count()===32,'First project lot plan');
+ check(await page.locator('#m-canvas .mlot').count()===96,'All projects represented in the overview');
  check(await page.locator('#m-canvas .street-name,#m-canvas .park,#m-canvas .neighbor').count()===0,'Overview contains no invented surroundings');
  check(await page.locator('#sharedMapWorkspace').count()===1,'A single map workspace');
+ check(await visible(page,'#sidebar')&&!await visible(page,'#menuToggle'),'Persistent desktop navigation');
+ check(await page.locator('#reportNavigation').getAttribute('aria-orientation')==='vertical','Vertical sidebar keyboard semantics');
+ check((await page.locator('#lotInspector').innerText()).includes('Todos los proyectos'),'Useful contextual summary before selection');
+ check(await page.locator('#lotInspector [data-goto="clientes"],#lotInspector [data-goto="ventas"]').count()>=2,'Summary actions navigate to real reports');
+ check(await page.evaluate(()=>{const metrics=document.querySelector('.overview-metrics').getBoundingClientRect(),detail=document.querySelector('.map-inspector').getBoundingClientRect(),map=document.getElementById('m-scroll').getBoundingClientRect();return Math.abs(metrics.top-detail.top)<2&&detail.left>=map.right&&map.height>metrics.height*3;}),'KPI / large model / right detail composition');
+ check(await page.evaluate(()=>{const map=document.getElementById('m-scroll').getBoundingClientRect(),svg=document.querySelector('.map-svg').getBoundingClientRect();return svg.left>=map.left&&svg.right<=map.right&&svg.top>=map.top&&svg.bottom<=map.bottom+1;}),'Fitted overview shows the entire model');
+ check(await page.locator('#m-canvas .lot-depth').count()===96,'Schematic depth follows actual lots');
+ check(!await page.locator('.overview-secondary').evaluate(el=>el.open),'Secondary charts start compact');
+ await page.locator('.overview-secondary>summary').click();
+ check(await visible(page,'#o-activity')&&await page.locator('#o-activity').evaluate(el=>el.width>0),'Optional activity chart expands correctly');
+ await page.locator('.overview-secondary>summary').click();
  await assertWidth(page);
  await page.screenshot({path:path.join(temporary,'overview-desktop.png'),fullPage:true});
- await page.locator('#m-proj-chips .proj-chip').nth(1).click();
- check(await page.locator('#o-homes').innerText()==='32','Overview project chips change the global scope');
+ await page.locator('#projectFilter').selectOption('bosque poniente · ejemplo');
+ check(await page.locator('#o-homes').innerText()==='32','The global project filter changes the overview scope');
  check(await page.evaluate(()=>sessionData.scope.every(r=>proyectoDe(r)==='Bosque Poniente · ejemplo')),'Canonical scope agrees with project');
+ check(await page.locator('#m-canvas .mlot').count()===32&&(await page.locator('#lotInspector').innerText()).includes('Bosque Poniente'),'Project filter updates model and unselected summary');
+ check(await page.evaluate(()=>selectDisplayedMapProject().lots.every(l=>sessionData.scope.includes(l.r))),'Map uses canonical project membership');
+ check((await page.locator('#o-cargo').innerText())==='$5,850,000','Project filter updates lower financial summary');
  const selectedId=await page.evaluate(()=>mapState.lots.find(l=>l.status==='cargo').r._id);
  const lot=await rowLot(page,selectedId);await lot.focus();await lot.press('Enter');
  check(await lot.getAttribute('aria-pressed')==='true','Keyboard lot selection');
@@ -152,6 +166,8 @@ async function assertWidth(page){check(await page.evaluate(()=>document.document
  check(!await visible(page,'#overviewSales')&&!await visible(page,'#overviewBridge')&&!await visible(page,'#overviewBalance'),'Unsupported monetary KPIs are omitted');
  check(await visible(page,'#overviewDataNote'),'Missing data is explained');
  check(await page.locator('#m-canvas .mlot').count()===1,'Incomplete row still has a lot');
+ check(await page.locator('#m-canvas .st-unknown').count()===1,'Unknown balance is not presented as current status');
+ check(await page.locator('#overviewProjects .project-progress').count()===0,'Missing date column does not imply zero project progress');
  // No lot identifiers: report data still loads and the map has a meaningful empty state.
  const noLots=[['Fraccionamiento','Prototipo','Saldo Edo Cuenta','Nombre Cliente','Precio Venta','Credito Plan Ventas'],['Sin lotes','Cedro',100,'Ana',1000,'Contado']];
  await upload(page,await fixture(page,noLots),'no-lots.xlsx',1);
@@ -164,12 +180,28 @@ async function assertWidth(page){check(await page.evaluate(()=>document.document
  await page.evaluate(()=>document.getElementById('demoBtn').click());
  for(const width of [1024,768,390,320]){
   await page.setViewportSize({width,height:900});await assertWidth(page);
+  check(!await visible(page,'#sidebar')&&await visible(page,'#menuToggle'),'Narrow navigation collapses at '+width);
+  check(await page.locator('.app-brand strong').isVisible(),'Brand remains visible at '+width);
+  await page.locator('#menuToggle').click();
+  check(await visible(page,'#sidebar')&&await page.locator('#sidebar').getAttribute('aria-modal')==='true','Accessible drawer at '+width);
+  check(await page.locator('#tab-ventas>span:not(.nav-marker)').evaluate(el=>parseFloat(getComputedStyle(el).opacity)===1&&el.getBoundingClientRect().width>20),'Inactive report labels remain visible at '+width);
+  check(await page.evaluate(()=>document.getElementById('app-main').inert),'Drawer suspends background keyboard navigation');
+  await page.keyboard.press('Tab');await page.keyboard.press('Tab');
+  check(await page.evaluate(()=>document.getElementById('sidebar').contains(document.activeElement)),'Drawer traps keyboard focus');
+  await page.keyboard.press('Escape');
+  check(!await visible(page,'#sidebar')&&await page.evaluate(()=>document.activeElement.id==='menuToggle'&&!document.getElementById('app-main').inert),'Escape closes drawer and restores focus');
   await page.screenshot({path:path.join(temporary,'overview-'+width+'.png'),fullPage:true});
  }
+ await page.setViewportSize({width:1800,height:1000});await assertWidth(page);
+ check(await visible(page,'#sidebar'),'Wide desktop restores persistent sidebar');
+ await page.setViewportSize({width:320,height:900});
  await page.emulateMedia({colorScheme:'dark'});await assertWidth(page);
  await page.screenshot({path:path.join(temporary,'overview-dark.png'),fullPage:true});
  const target=await rowLot(page,1);await target.focus();await target.press('Space');
  check(await target.getAttribute('aria-pressed')==='true','Space selects a lot at narrow width');
+ await page.locator('[data-clear-lot]').click();
+ check(await page.evaluate(()=>mapState.selectedId===null)&&await page.locator('#lotInspector .project-inspector').count()===1,'Clearing selection restores real project summary');
+ await target.focus();await target.press('Enter');
  await page.locator('#lotInspector [data-open-rid]').click();await page.locator('#sheetName').waitFor({state:'visible'});await page.keyboard.press('Escape');
  check(await page.evaluate(()=>document.activeElement.matches('[data-open-rid]')),'Focus returns after closing the client sheet');
  const touchPage=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'reduce'});
@@ -195,12 +227,15 @@ async function assertWidth(page){check(await page.evaluate(()=>document.document
   check(await motionPage.locator('#overviewMapHost .map-board').evaluate(el=>getComputedStyle(el).opacity)==='1','Map has no reveal animation delay');
   await motionPage.locator('#m-canvas .mlot').nth(1).click();const selected=await motionPage.evaluate(()=>mapState.selectedId);
   await motionPage.locator('.overview-operation [data-goto="mapa"]').click();await motionPage.waitForFunction(()=>document.getElementById('panel-mapa').classList.contains('active'));
-  await motionPage.locator('#menuToggle').click();await motionPage.locator('#motionMenuList .motion-navitem').first().press('Enter');
+  await motionPage.locator('#tab-resumen').click();
   await motionPage.waitForFunction(()=>document.getElementById('panel-resumen').classList.contains('active'));
-  check(await motionPage.evaluate(id=>mapState.selectedId===id,selected),'Motion menu navigation preserves lot selection');
+  check(await motionPage.evaluate(id=>mapState.selectedId===id,selected),'Desktop sidebar navigation preserves lot selection with motion enabled');
   check(await motionPage.locator('#overviewProjects .project-summary').first().evaluate(el=>getComputedStyle(el).opacity)==='1','Project summaries remain visible without scrolling to reveal them');
   await motionPage.waitForFunction(()=>{const box=document.getElementById('motionCurtain').getBoundingClientRect();return box.top>=innerHeight||box.bottom<=0;});
   await motionPage.screenshot({path:path.join(temporary,'overview-motion.png'),fullPage:false});
+  await motionPage.setViewportSize({width:390,height:844});await motionPage.locator('#menuToggle').click();
+  await motionPage.locator('#tab-clientes').press('Enter');await motionPage.waitForFunction(()=>document.getElementById('panel-clientes').classList.contains('active'));
+  check(!await visible(motionPage,'#sidebar')&&await visible(motionPage,'#panel-clientes'),'Motion uses the same working mobile drawer');
   await motionContext.close();
  }
  check(errors.length===0,'No uncaught browser errors: '+errors.join('\n'));

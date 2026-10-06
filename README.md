@@ -1,43 +1,48 @@
-# Templer · Mis reportes
+# Templer · Operación inmobiliaria
 
-Aplicación de reportes inmobiliarios en un único HTML, basada en el archivo existente proporcionado por el usuario. La importación XLSX/XLS/CSV y el ejemplo se procesan en el navegador. No requiere base de datos, backend ni compilación.
+Aplicación estática en `index.html`. Importa XLSX, XLS o CSV y procesa los datos en el navegador. No necesita compilación, servidor de datos, API, cuentas ni credenciales.
 
-## Ejecutar
+## Abrir la aplicación
 
-Abre `index.html` directamente en un navegador, o usa el servidor estático local:
+Puedes abrir `index.html` directamente en un navegador moderno. Para servirlo desde este entorno:
 
 ```bash
 cd /workspace/dash
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-El servidor es únicamente una herramienta de desarrollo; no recibe los archivos importados. Los datos de sesión permanecen en el navegador. Las librerías de importación, gráficas y exportación están integradas. Las animaciones existentes usan GSAP/ScrollTrigger/SplitText y Lenis desde sus versiones fijadas en jsDelivr; la aplicación conserva su alternativa sin esas animaciones cuando no están disponibles.
+Las librerías de importación, gráficas y exportación están integradas. Las animaciones opcionales GSAP/Lenis usan las URLs originales de jsDelivr; la importación, navegación y reportes también funcionan sin ellas.
 
-## Visión general
+## Rediseño V2
 
-- Indicadores de viviendas con LoteID, con/sin cliente y valor con precio de venta; resumen financiero y de escrituración.
-- El mismo plano, controles, modelo y selección se comparten con **Plano de lotes**. No se crea un segundo mapa. La vista general presenta un esquema por manzanas; la vista detallada conserva el entorno ilustrativo original.
-- Al seleccionar un proyecto desde el esquema, cambia el filtro global. Para regresar al conjunto, usa **Todos los proyectos** en el selector superior. En ese conjunto, los KPIs abarcan todos los proyectos y el plano muestra el proyecto indicado explícitamente.
-- Selección persistente por identificador de fila, mediante clic, toque, Enter o Espacio. La ficha contextual muestra los campos importados y permite abrir la ficha completa o localizar el lote en el plano detallado.
-- Se omiten los nuevos indicadores cuando faltan sus columnas fuente. Una nota explica qué datos no están disponibles; no se convierten esas ausencias en KPIs de valor cero.
+La implementación sigue `PROMPT_CODEX_WARETRACK_INMOBILIARIA_V2.md` y el esquema de composición enviado por el usuario. No se recibió la captura mencionada.
 
-Se conservan Clientes, Ventas, Personal, Crédito puente, Saldos por proyecto y Plano de lotes; búsqueda global, tablas, filtros, ejemplo y exportaciones Excel/PDF/SVG.
+- Navegación lateral persistente en escritorio y un mismo menú accesible en tablet/móvil, con teclado, Escape y restauración del foco.
+- Barra superior con marca, vista, filtro global de proyecto, búsqueda, archivo importado, cambio de archivo y exportaciones Excel/PDF.
+- Cuatro KPI compactos sobre el plano: viviendas, con cliente, sin cliente y valor de venta; se omiten cuando faltan sus columnas fuente.
+- Plano protagonista, con agrupación por manzana, perspectiva esquemática, profundidad sutil, estado, selección, búsqueda, zoom y desplazamiento. «Todos los proyectos» representa todos sus lotes; seleccionar un proyecto actualiza toda la operación.
+- Una sola ficha contextual a la derecha, alineada con los KPI y el plano. Sin selección muestra el resumen del proyecto; al seleccionar muestra datos reales y acciones de ficha/plano. En móvil se coloca debajo del modelo.
+- Estado, saldo y escrituración en un resumen inferior compacto. Actividad y seguimiento se pueden desplegar; los proyectos aparecen como filas compactas.
+
+Se conservan Clientes, Ventas, Personal, Crédito puente, Saldos por proyecto y Plano de lotes; importaciones, ejemplo, búsqueda global, tablas, filtros de periodo, fichas y exportaciones Excel/PDF/SVG.
 
 ## Datos y funciones
 
-`pickBestSheet` → `rowsFromSheet` → `enterWorkspace` → `sessionData.rows` es la entrada actual. Los cálculos existentes `computeClientes`, `computeVentas`, `computePersonal`, `computePuente`, `computeSaldos` y `computeMapa` consumen esas filas canónicas. `selectUnitAssignment` añade únicamente la agregación de asignación de cliente.
+`pickBestSheet` → `rowsFromSheet` → `enterWorkspace` → `sessionData.rows` sigue siendo la entrada. Los normalizadores, `lotStatus`, cálculos `compute*`, reportes detallados y generadores de exportación conservan sus reglas.
 
-`mountSharedMap` mueve el único conjunto de controles y plano entre paneles, conservando sus IDs y eventos. `layoutMapa` y `buildPlanoSvg` aceptan la opción `schematic`, reutilizando la geometría de lotes y omitiendo el entorno ilustrativo en la vista general. `decorateMap` e `inspectLot` restauran la selección por `mapState.selectedId`, sin depender del orden de elementos SVG.
+`mountSharedMap` mueve el único plano y la única ficha entre las vistas. `selectDisplayedMapProject` reutiliza los proyectos, manzanas, lotes y totales de `computeMapa`: el filtro global gobierna la vista general, incluyendo su esquema conjunto. El plano detallado conserva su exploración interna por proyecto. No existe un segundo motor de mapa.
 
-`enterWorkspace(rows, fileName, demo, fields)` conserva un cuarto argumento opcional con las columnas reconocidas. `renderOverviewAvailability` utiliza esa metadata para decidir qué indicadores están respaldados por el archivo.
+`layoutMapa` y `buildPlanoSvg` usan la misma geometría de lotes. La opción `schematic` omite el entorno ilustrativo del plano detallado y aplica una proyección visual con profundidad; no acredita calles, coordenadas, construcción ni ubicación geográfica.
 
-Se mantiene la semántica original de los reportes: se cuenta como escrituración la presencia de **F Estim Escritura**, y los filtros de periodo afectan Ventas y Personal. El valor de venta de la vista general indica el periodo seleccionado; inventario, saldos y plano conservan el alcance original por proyecto. Un esquema no acredita ubicación geográfica, disponibilidad comercial ni progreso de obra.
+`decorateMap` e `inspectLot` conservan la selección mediante el identificador de fila. `resetInspector` muestra el resumen sin selección. `syncNavigation` y `closeSidebar` controlan el menú en todos los modos de movimiento.
 
-Para una integración futura, añade un adaptador que normalice los registros y la disponibilidad de campos al contrato de `enterWorkspace`; reutiliza los selectores existentes. No se implementaron API, autenticación ni almacenamiento persistente.
+`enterWorkspace` conserva metadata de las columnas reconocidas. `renderOverviewAvailability` omite KPI sin respaldo. `mapStatusAvailable` presenta el estado como no disponible cuando faltan datos para determinarlo; no modifica la regla de estado de los reportes.
 
-## Validación en navegador
+La semántica original se conserva: los reportes cuentan como escrituración la presencia de **F Estim Escritura**. En la ficha general el campo se identifica como **Escritura estimada**. Los periodos afectan Ventas y Personal; inventario, saldos y plano mantienen su alcance por proyecto. El KPI de valor de venta indica el periodo activo. «Sin cliente» no implica disponibilidad comercial.
 
-Las pruebas son herramientas de desarrollo y no se añaden dependencias a la aplicación:
+## Validación
+
+Las pruebas son herramientas de desarrollo, separadas de la aplicación:
 
 ```bash
 npm install --prefix /workspace/.templer-tools --cache /workspace/.templer-npm-cache playwright@1.58.2 --no-audit --no-fund
@@ -45,9 +50,7 @@ cd /workspace/dash
 NODE_PATH=/workspace/.templer-tools/node_modules node tests/operations.cjs
 ```
 
-Requieren Chromium en `/usr/bin/chromium` y `pdftotext`. `CHROMIUM_EXECUTABLE` permite elegir otra instalación de Chromium; `TEMPLER_URL` permite elegir la dirección del servidor.
-
-El script de instalación del entorno guarda las cuatro librerías originales de animación en `/workspace/.templer-tools/cdn`, descargadas con verificación TLS. Para validar también el comportamiento con GSAP/Lenis, ejecuta:
+Requieren Chromium (`/usr/bin/chromium`) y `pdftotext`. `CHROMIUM_EXECUTABLE` y `TEMPLER_URL` permiten elegir otras instalaciones/direcciones. Para comprobar también las animaciones originales, usa la caché descargada por el script del entorno con TLS verificado:
 
 ```bash
 NODE_PATH=/workspace/.templer-tools/node_modules \
@@ -55,4 +58,4 @@ TEMPLER_CDN_CACHE=/workspace/.templer-tools/cdn \
 node tests/operations.cjs
 ```
 
-La caché se usa únicamente en el navegador de pruebas. No cambia las URLs de la aplicación ni desactiva verificación de certificados. Las pruebas cubren importación XLSX/XLS/CSV, reimportación, cálculos, proyectos, selección, fichas, búsqueda, periodos, reportes, exportaciones, columnas faltantes, estados vacíos, teclado, toque, tema oscuro y anchos de 320 a 1440 px. Guardan capturas y exportaciones en una carpeta temporal indicada al finalizar.
+Las pruebas cubren importaciones, datos, navegación, mapa, filtros, fichas, búsqueda, exportaciones, estados incompletos/vacíos, movimiento reducido, tema oscuro, toque y anchos de 320 a 1800 px. Guardan capturas y archivos exportados en una carpeta temporal indicada al terminar. `VALIDATION.md` describe la comprobación de esta entrega.

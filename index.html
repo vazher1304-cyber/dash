@@ -1438,94 +1438,144 @@ body{font-size:16px}html{overflow-x:clip}
 #sidebar{display:none!important}
 </style>
 <style id="templer-operations">
-/* Operations overview: same map workspace and Templer tokens, no second map model. */
-#panel-resumen .view-heading{margin-bottom:10px;align-items:center}
-#panel-resumen .view-heading h1{font-size:clamp(32px,3.3vw,50px);letter-spacing:-.045em;line-height:1.1}
-.overview-data-note{padding:12px 16px;margin:-12px 0 24px;border-left:2px solid var(--blue);background:var(--blue-soft);color:var(--muted);font-size:12px;line-height:1.6}
-.overview-intro{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
-#panel-resumen .overview-metrics{grid-template-columns:repeat(4,minmax(0,1fr));margin:22px 0 30px;background:var(--line);border-color:var(--line)}
-#panel-resumen .overview-metric{padding:20px 22px;background:var(--surface);min-height:126px}
-#panel-resumen .overview-metric:hover{background:var(--hover-surface)}
-#panel-resumen .metric-top{font-size:12px;margin-bottom:14px;color:var(--muted)}
-#panel-resumen .overview-metric>strong{font-size:clamp(24px,2.5vw,36px);font-weight:550;line-height:1.2}
-#panel-resumen .overview-metric>small{display:block;margin-top:8px;font-size:11px;line-height:1.5;color:var(--muted)}
-#panel-resumen #o-sales{font-size:clamp(22px,2.2vw,32px)}
-.overview-operation{margin:0 0 30px}
-.overview-operation>.card-heading{margin-bottom:18px;gap:16px;flex-wrap:wrap}
-.overview-operation h2{margin:6px 0 0;font-size:26px;font-weight:500;letter-spacing:-.035em;line-height:1.2}
-#overviewMapScope{max-width:650px;margin:8px 0 0;font-size:12px;line-height:1.6;color:var(--muted)}
-#panel-resumen .map-layout{grid-template-columns:minmax(0,1fr) 310px;gap:18px}
-#panel-resumen .map-board,#panel-resumen .map-inspector{border:1px solid var(--line);border-radius:4px;box-shadow:none;background:var(--surface)}
-#panel-resumen .map-scroll{min-height:360px;max-height:520px}
-#panel-resumen #m-canvas{min-height:360px;display:flex;align-items:center}
-#panel-resumen #m-canvas .map-svg{flex-shrink:0}
-#panel-resumen .map-toolbar{padding:14px 16px;gap:12px}
-#panel-resumen .map-stats{gap:8px}
-#panel-resumen .legend-chip{padding:12px 16px;border-radius:4px;box-shadow:none;border:1px solid var(--line)}
-#panel-resumen .legend-chip strong{font-size:22px}
-#panel-resumen .legend-chip .t{font-size:11px}
-#panel-resumen .map-note{font-size:11px}
-#panel-resumen .overview-lead{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,.8fr);gap:18px;margin-bottom:30px}
-#panel-resumen .balance-card{padding:24px}
-#panel-resumen .balance-number{font-size:clamp(30px,3vw,44px);margin-top:24px}
-#panel-resumen .balance-split{margin-top:22px;gap:16px;flex-wrap:wrap}
-#panel-resumen .balance-split strong{font-size:20px}
-#panel-resumen .progress-card{padding:24px;min-height:0}
-#panel-resumen .progress-content{gap:18px}
-#panel-resumen .progress-ring{width:118px;height:118px;flex-shrink:0}
-#panel-resumen .progress-ring strong{font-size:24px}
-#panel-resumen .progress-legend strong{font-size:22px}
-#panel-resumen .card-heading h3{font-size:18px}
-.overview-bridge{min-width:0;display:flex;flex-direction:column;align-items:flex-start;padding:24px;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
-.overview-bridge>strong{font-size:clamp(24px,2.3vw,34px);font-weight:550;letter-spacing:-.04em;margin-top:24px;overflow-wrap:anywhere}
-.overview-bridge p{font-size:12px;line-height:1.6;color:var(--muted)}
-.overview-bridge .text-button{margin-top:auto;padding-top:18px}
-.inspector-finances{border-top:1px solid var(--line);padding-top:16px!important}
-.inspector-actions{display:flex;flex-direction:column;gap:8px}
-.inspector-actions .text-button{font-size:12px;justify-content:center;white-space:normal}
-.map-inspector .tip-head,.map-inspector .tip-name{overflow-wrap:anywhere}
-.shared-map-workspace .map-view-switch button,.shared-map-workspace .map-zoom button{min-height:40px;min-width:40px}
-.shared-map-workspace .proj-chip{min-height:40px;white-space:normal;overflow-wrap:anywhere}
-.shared-map-workspace .map-search{min-height:40px}
-.shared-map-workspace .map-svg .mlot:focus-visible{stroke:var(--map-edge);stroke-width:3.5;stroke-dasharray:3 1}
-.shared-map-workspace .map-svg .mlot[aria-pressed=true]{stroke:var(--map-edge);stroke-width:3;stroke-dasharray:none}
-#panel-resumen .card-heading{flex-wrap:wrap;gap:12px}
-#panel-resumen .card-tools{max-width:100%;flex-wrap:wrap}
-#panel-resumen .chart-wrap{overflow:hidden}
-#panel-resumen .chart-wrap canvas{max-width:100%}
-#panel-resumen .view-period{display:inline-flex}
-#panel-resumen .projects-card{margin-top:30px}
-#panel-resumen .project-summary{padding:24px}
-#panel-resumen .project-summary h4{font-size:24px}
-@media(max-width:1100px){
- #panel-resumen .overview-lead{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
- .overview-bridge{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;gap:12px 24px}
- .overview-bridge>strong,.overview-bridge .text-button{margin:0;padding:0}
- .overview-bridge p{margin:0}
- #panel-resumen .map-layout{grid-template-columns:minmax(0,1fr) 270px}
- #panel-resumen .map-search{width:100%;margin-left:0}
+/* The contextual inspector shares the KPI and model rows on desktop. */
+.overview-cockpit{display:grid;grid-template-columns:minmax(0,1fr) 264px;gap:14px;align-items:start;margin:18px 0}
+#panel-resumen .overview-cockpit>.overview-metrics{grid-column:1;grid-row:1;margin:0;gap:10px}
+#panel-resumen .overview-cockpit>.overview-operation{grid-column:1;grid-row:2;margin:0;min-width:0}
+#panel-resumen .overview-cockpit>.overview-data-note{grid-column:1;grid-row:2;margin:0}
+.overview-inspector-host{grid-column:2;grid-row:1/4;min-width:0;height:100%}
+#panel-resumen .overview-inspector-host .map-inspector{height:100%}
+#panel-resumen .overview-cockpit .map-layout{grid-template-columns:minmax(0,1fr)}
+#panel-resumen .overview-cockpit #o-sales{font-size:clamp(14px,1.45vw,24px)}
+@media(min-width:1800px){.overview-cockpit{grid-template-columns:minmax(0,1fr) 310px}}
+@media(min-width:1100px) and (max-width:1350px){.overview-cockpit{grid-template-columns:minmax(0,1fr) 240px}}
+@media(max-width:1099px){.overview-cockpit{grid-template-columns:minmax(0,1fr) 250px}}
+@media(max-width:800px){.overview-cockpit{grid-template-columns:minmax(0,1fr)}.overview-inspector-host{grid-column:1;grid-row:4}#panel-resumen .overview-inspector-host .map-inspector{height:auto}}
+/* Templer operations cockpit. Existing controls, report data and SVG model. */
+.app.show{display:grid;grid-template-columns:212px minmax(0,1fr);grid-template-rows:auto 1fr;min-height:100dvh}
+.app .topbar{grid-column:1/-1;position:sticky;top:0;z-index:80;max-width:none;margin:0;padding:14px 22px;gap:18px;min-height:78px;background:var(--bg);border-bottom:1px solid var(--line)}
+.topbar-left{gap:18px;flex-shrink:0}.app-brand{width:168px}.app-brand strong{font-size:25px}.app-brand .brand-emblem{display:block}
+.breadcrumb{display:block!important;font-size:13px;white-space:nowrap}.breadcrumb b{font-weight:550}
+.topbar-project{min-width:0;max-width:255px;margin-left:auto}.topbar-project .project-select{height:42px;max-width:100%;border-color:var(--line);padding:0 10px;background:var(--surface)}
+.topbar-project select{font-size:12px;width:100%}.app .topbar-actions{gap:6px}.app .topbar-actions button{min-height:42px;padding-inline:12px;font-size:12px}.topbar-actions .search-trigger{display:inline-flex}.search-trigger kbd{display:none}
+.app .sidebar-file{background:none;padding:0;gap:6px}.app .active-file{display:flex}.app .active-file span{max-width:145px;font-size:11px}.app .sidebar-file .btn-secondary{margin:0;padding-inline:10px;box-shadow:none;border:1px solid var(--line)}
+.app .menu-toggle,.js.motion-enabled .app .menu-toggle{display:none!important}
+.app #sidebar{display:flex!important;grid-column:1;grid-row:2;position:sticky;top:78px;align-self:start;height:calc(100dvh - 78px);padding:28px 14px 18px;margin:0;background:var(--surface);border:0;border-right:1px solid var(--line);flex-direction:column;justify-content:flex-start;pointer-events:auto;z-index:70;overflow-y:auto}
+.app #sidebar[hidden]{display:none!important}.sidebar-heading{display:flex;justify-content:space-between;align-items:center;padding:0 12px 18px}.sidebar-heading .card-eyebrow{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+#sidebarClose{display:none;width:44px;height:44px;border:1px solid var(--line);background:transparent;font-size:26px;color:var(--ink)}
+.app .tabs{flex-direction:column;align-items:stretch;width:100%;gap:6px;background:none;border:0;overflow:visible;box-shadow:none;padding:0;backdrop-filter:none}
+.app .tab{height:46px;padding:0 12px;gap:10px;font-size:12px;border-radius:5px;flex:0 0 auto;text-align:left;white-space:normal;color:var(--muted);transform:none!important}
+.app .tab .icon{display:block;width:17px;height:17px;flex-shrink:0}.app .tab.active{background:var(--blue-soft);color:var(--blue);box-shadow:inset 3px 0 var(--blue)}
+.app .tab:hover{background:var(--fill)}.app .tab-thumb{display:none}.app .nav-marker{display:none!important}.app .nav-separator{display:block!important;height:1px;background:var(--line);margin:12px}
+.sidebar-local{margin-top:auto;padding:28px 12px 0;display:flex;gap:9px;color:var(--muted);font-size:10px;line-height:1.7}.sidebar-local .icon{width:15px;height:15px;flex-shrink:0}.sidebar-local small{display:block;color:var(--faint);font-size:10px}
+.app .main-content{grid-column:2;grid-row:2;min-width:0;max-width:none;padding:22px 26px 28px;margin:0}
+.app .scopebar{margin:0 0 15px;min-height:18px;gap:10px}.app .scope-title{font-size:11px}.app .demo-banner{padding:8px 12px;margin:0 0 16px;font-size:11px}.app .demo-banner button{font-size:11px;min-height:28px}
+.app .motion-marquee{display:none}.app .footer-note{margin-top:24px;padding-top:14px;font-size:10px}
+#panel-resumen .view-heading{align-items:center;gap:12px;margin:0 0 6px}#panel-resumen .view-heading h1{font-size:28px;line-height:1.2;letter-spacing:-.045em;font-weight:550;max-width:none}
+#panel-resumen .view-period{font-size:10px}#panel-resumen .overview-intro{margin:0;color:var(--muted);font-size:12px;line-height:1.6}
+#panel-resumen .overview-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0 22px;border:0;background:none;box-shadow:none;border-radius:0;overflow:visible}
+#panel-resumen .overview-metric{display:block;min-width:0;min-height:100px;padding:16px 18px;border:1px solid var(--line);border-radius:5px;background:var(--surface);text-align:left;box-shadow:none;position:relative}
+#panel-resumen .overview-metric:hover{border-color:var(--blue);background:var(--hover-surface)}#panel-resumen .metric-top{font-size:11px;margin:0 0 10px;color:var(--muted);display:flex;align-items:center;gap:8px}
+#panel-resumen .metric-top::before{content:'';width:5px;height:5px;background:var(--blue);border-radius:50%;opacity:.8}#panel-resumen .metric-top::after{display:none}
+#panel-resumen .overview-metric>strong{display:block;font-size:29px;line-height:1.2;font-weight:550;letter-spacing:-.04em;text-align:left}#panel-resumen #o-sales{font-size:clamp(19px,1.85vw,28px);white-space:nowrap}
+#panel-resumen .overview-metric>small{display:block;margin-top:5px;color:var(--faint);font-size:10px;line-height:1.5}
+.overview-data-note{margin:0 0 18px;padding:10px 14px;border-left:2px solid var(--blue);background:var(--blue-soft);color:var(--muted);font-size:11px;line-height:1.6}
+.overview-operation{margin-bottom:18px}.overview-operation>.card-heading{margin-bottom:12px;gap:16px;align-items:center;flex-wrap:wrap}.overview-operation h2{font-size:20px;font-weight:550;margin:3px 0 0;letter-spacing:-.03em;line-height:1.3}
+#panel-resumen .card-eyebrow{font-size:10px;color:var(--muted);letter-spacing:.025em}#overviewMapScope{margin:5px 0 0;font-size:10px;color:var(--muted);line-height:1.5}.overview-operation .text-button{font-size:11px}
+#panel-resumen .shared-map-workspace{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}#panel-resumen .map-controls{order:0;display:flex;flex-wrap:wrap;gap:8px;margin:0}
+#panel-resumen .map-stats{order:2;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0}
+#panel-resumen .map-layout{order:1;display:grid;grid-template-columns:minmax(0,1fr) 264px;gap:14px;align-items:stretch}
+#panel-resumen .map-board,#panel-resumen .map-inspector{min-width:0;border:1px solid var(--line);border-radius:5px;box-shadow:none;background:var(--surface);overflow:hidden}
+#panel-resumen .map-board{background:var(--bg)}#panel-resumen .map-toolbar{padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--line);font-size:10px;gap:8px;flex-wrap:wrap}
+#panel-resumen #m-toolbar-info{font-size:10px;flex:1 1 170px}#panel-resumen #m-toolbar-info b{font-weight:550}
+#panel-resumen .map-scroll{height:clamp(370px,44vh,510px);min-height:370px;max-height:none;background-color:var(--bg);background-image:radial-gradient(var(--line) .8px,transparent .8px);background-size:18px 18px;position:relative}
+#panel-resumen #m-canvas{min-height:100%;display:flex;align-items:center;padding:24px 16px}#panel-resumen #m-canvas .map-svg{flex-shrink:0}
+#panel-resumen .map-svg .ground{fill:transparent}#panel-resumen .map-svg .mz-block{fill:var(--fill);stroke:var(--line);stroke-width:.6}#panel-resumen .map-svg .mz-label{font-size:7px;font-weight:550;fill:var(--muted);stroke:none}
+#panel-resumen .map-svg .mlot{stroke-width:.65}#panel-resumen .map-svg .lot-depth,.map-svg .lot-depth{fill:var(--map-edge);opacity:.18;pointer-events:none}
+#panel-resumen .map-svg .mlot[aria-pressed=true]{stroke:var(--blue);stroke-width:3;stroke-dasharray:none;filter:drop-shadow(0 2px 3px rgba(20,117,188,.28))}
+.shared-map-workspace .map-svg .mlot:focus-visible{stroke:var(--blue);stroke-width:3;stroke-dasharray:3 1}
+#panel-resumen .map-note{font-size:9px;line-height:1.6;padding:10px 14px;gap:8px;background:var(--surface);border-top:1px solid var(--line);margin:0}
+#panel-resumen .legend-chip{padding:11px 13px;border:1px solid var(--line);border-radius:4px;background:var(--surface);box-shadow:none;min-width:0;gap:7px}
+#panel-resumen .legend-chip .t{font-size:10px}#panel-resumen .legend-chip strong{font-size:19px;font-weight:550}#panel-resumen .legend-chip strong small{font-size:9px}
+#panel-resumen .map-inspector{padding:0;align-self:stretch;position:static}#panel-resumen .inspector-header{padding:15px 17px;border-bottom:1px solid var(--line);margin:0;font-size:11px}
+#lotInspector{padding:18px 17px}.map-inspector .tip-head,.map-inspector .tip-name{overflow-wrap:anywhere}.map-inspector .tip-name{font-size:18px;margin:12px 0 14px}.map-inspector .tip-head{font-size:11px}
+#lotInspector dl{font-size:11px;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.1fr);gap:9px;margin:14px 0;line-height:1.5}#lotInspector dd{margin:0;text-align:right;overflow-wrap:anywhere}#lotInspector dt{color:var(--muted)}
+.inspector-finances{border-top:1px solid var(--line);padding-top:14px}.inspector-actions{display:flex;flex-direction:column;gap:7px;margin-top:20px}.inspector-actions .text-button{font-size:11px;white-space:normal;justify-content:center;min-height:36px}.inspector-actions .btn-secondary{font-size:11px;min-height:42px}
+.inspector-clear{color:var(--muted)}.project-inspector h3{font-size:22px;font-weight:550;line-height:1.3;letter-spacing:-.04em;margin:8px 0 10px;overflow-wrap:anywhere}.project-inspector>p{font-size:11px;color:var(--muted);line-height:1.6;margin:0}.inspector-total{display:flex;align-items:center;gap:12px;padding:22px 0;border-bottom:1px solid var(--line)}.inspector-total strong{font-size:40px;letter-spacing:-.05em;font-weight:550}.inspector-total span{font-size:10px;color:var(--muted);max-width:80px}
+#panel-resumen .inspector-foot{margin:0;padding:10px 17px;border-top:1px solid var(--line);font-size:10px;background:var(--bg)}
+.shared-map-workspace .map-view-switch button,.shared-map-workspace .map-zoom button{min-height:36px;min-width:36px;font-size:10px}.shared-map-workspace .proj-chip{min-height:38px;font-size:11px;white-space:normal;overflow-wrap:anywhere;border-radius:4px;box-shadow:none}.shared-map-workspace .map-search{min-height:38px;border:1px solid var(--line);border-radius:4px;background:var(--surface);box-shadow:none}.shared-map-workspace .map-search input{font-size:11px}
+#panel-resumen .overview-lead{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,.8fr);gap:12px;margin:0 0 18px}
+#panel-resumen .balance-card,#panel-resumen .progress-card,#panel-resumen .overview-bridge{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:17px 18px;box-shadow:none;min-height:0;min-width:0}
+#panel-resumen .balance-title{color:var(--muted)}#panel-resumen .balance-title .icon{color:var(--blue);width:16px;height:16px}#panel-resumen .balance-title .card-eyebrow{color:var(--muted)}
+#panel-resumen .balance-number{font-size:27px;margin-top:12px;letter-spacing:-.04em;line-height:1.2}#panel-resumen .balance-split{display:flex;flex-wrap:wrap;padding-top:0;margin-top:12px;gap:8px 22px}#panel-resumen .balance-split span{font-size:10px;color:var(--muted)}#panel-resumen .balance-split span i{background:var(--muted)}#panel-resumen .balance-split strong{font-size:15px;letter-spacing:-.02em}#panel-resumen .balance-link{margin-top:12px;color:var(--blue);font-size:11px}
+#panel-resumen .progress-card .card-heading{margin-bottom:12px}#panel-resumen .card-heading h3{font-size:13px;font-weight:550}#panel-resumen .progress-content{flex-direction:row;gap:16px;align-items:center}#panel-resumen .progress-ring{width:84px;height:84px;flex:0 0 84px}#panel-resumen .progress-ring strong{font-size:18px}#panel-resumen .progress-ring small{font-size:8px}#panel-resumen .progress-legend{flex-direction:column;gap:9px}#panel-resumen .progress-legend span{font-size:10px}#panel-resumen .progress-legend strong{font-size:18px;line-height:1.1}
+#panel-resumen .overview-bridge{display:flex;flex-direction:column;align-items:flex-start}#panel-resumen .overview-bridge>strong{font-size:25px;margin-top:12px;letter-spacing:-.04em;overflow-wrap:anywhere}#panel-resumen .overview-bridge p{font-size:10px;color:var(--muted);line-height:1.5;margin:10px 0}#panel-resumen .overview-bridge .text-button{font-size:11px;margin-top:auto;padding-top:8px}
+.overview-secondary{border:1px solid var(--line);border-radius:5px;background:var(--surface);margin-bottom:18px}.overview-secondary>summary{cursor:pointer;padding:14px 18px;font-size:12px;font-weight:550;list-style-position:inside}.overview-secondary>summary span{font-size:10px;font-weight:400;color:var(--muted);margin-left:12px}#panel-resumen .overview-bottom{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;padding:18px;border-top:1px solid var(--line);margin:0}
+#panel-resumen .activity-card,#panel-resumen .attention-card{padding:0;box-shadow:none;border:0;background:transparent}#panel-resumen .activity-card .chart-wrap{height:180px;overflow:hidden}#panel-resumen .chart-wrap canvas{max-width:100%}#panel-resumen .card-heading{flex-wrap:wrap;gap:8px}#panel-resumen .card-tools{max-width:100%;flex-wrap:wrap}#panel-resumen .attention-item{padding:11px 0}#panel-resumen .attention-item strong{font-size:11px}#panel-resumen .attention-count{font-size:20px}
+#panel-resumen .projects-card{margin-top:0}#panel-resumen .projects-card>.card-heading{margin-bottom:10px}#panel-resumen .project-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}
+#panel-resumen .project-summary{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:5px 12px;min-height:0;padding:14px 16px;border:1px solid var(--line);border-radius:4px;background:var(--surface);box-shadow:none}
+#panel-resumen .project-summary h4{font-size:13px;font-weight:550;margin:0;grid-column:1/-1}#panel-resumen .project-summary>span{font-size:10px;color:var(--muted);grid-column:1/-1}#panel-resumen .project-progress{grid-column:1/-1;margin:7px 0 3px;height:3px}#panel-resumen .project-summary small{font-size:9px;line-height:1.5;display:flex;gap:8px}#panel-resumen .project-summary>strong{font-size:15px;grid-column:1;letter-spacing:-.02em}#panel-resumen .project-summary>small:last-child{grid-column:2;grid-row:5}
+@media(min-width:1800px){.app .main-content{padding-inline:38px}#panel-resumen .map-layout{grid-template-columns:minmax(0,1fr) 310px}#panel-resumen .map-scroll{height:510px}}
+@media(min-width:1100px) and (max-width:1350px){.app.show{grid-template-columns:184px minmax(0,1fr)}.app-brand{width:142px}.app .topbar{gap:10px;padding-inline:20px}.app .active-file span{max-width:95px}.topbar-actions .icon-button{display:none}.app .main-content{padding-inline:20px}.app .tab{font-size:11px;padding-inline:10px}#panel-resumen .map-layout{grid-template-columns:minmax(0,1fr) 240px}.app .topbar-actions button{padding-inline:10px}.topbar-project{max-width:185px}}
+@media(max-width:1099px){
+ .app.show{display:block}.app .topbar{position:sticky;flex-wrap:wrap;padding:12px 18px;gap:10px;min-height:68px}.topbar-left{gap:12px}.app-brand{width:auto}.breadcrumb{font-size:12px}.topbar-project{max-width:260px}.app .topbar-actions{width:100%;justify-content:flex-end;flex-wrap:wrap}.app .sidebar-file{margin-right:auto}.app .active-file span{max-width:230px}.app .main-content{padding:20px}
+ .app .menu-toggle,.js.motion-enabled .app .menu-toggle{display:inline-flex!important;width:42px;height:42px;border:1px solid var(--line)}
+ .app #sidebar{position:fixed;top:0;left:0;bottom:0;z-index:220;width:min(290px,85vw);height:100dvh;padding:18px 14px;border-right:1px solid var(--line);box-shadow:var(--shadow-float)}#sidebarClose{display:block}.sidebar-heading{padding:0 0 22px 12px}.app .tab{font-size:13px;height:48px}
+ .app .sidebar-backdrop.open{display:block!important;position:fixed;inset:0;z-index:210;background:rgba(20,20,20,.42);border:0;padding:0;backdrop-filter:blur(2px)}
+ #panel-resumen .map-layout{grid-template-columns:minmax(0,1fr) 250px}
 }
-@media(max-width:800px){
- #panel-resumen .map-layout{grid-template-columns:minmax(0,1fr)}
- #panel-resumen .overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
- #panel-resumen .overview-lead{grid-template-columns:minmax(0,1fr)}
- #panel-resumen .view-heading{align-items:flex-start;flex-wrap:wrap;gap:10px}
- #panel-resumen .view-period{font-size:11px}
- #panel-resumen .map-inspector dl{grid-template-columns:auto minmax(0,1fr)}
- .overview-bridge{grid-column:auto;display:flex;flex-direction:column;align-items:flex-start}
- #panel-resumen .map-scroll{min-height:280px;max-height:420px}
- #panel-resumen #m-canvas{min-height:280px}
+@media(max-width:800px){#panel-resumen .map-layout{grid-template-columns:minmax(0,1fr)}#panel-resumen .map-scroll{height:360px;min-height:320px}#panel-resumen .map-inspector{display:block}#lotInspector{padding:18px}#panel-resumen .overview-lead{grid-template-columns:repeat(2,minmax(0,1fr))}#panel-resumen .overview-bridge{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px 20px}#panel-resumen .overview-bridge>strong,#panel-resumen .overview-bridge p,#panel-resumen .overview-bridge .text-button{margin:0;padding:0}#panel-resumen .map-search{width:100%;margin-left:0}.project-inspector .inspector-total{padding:14px 0}.inspector-actions{margin-top:14px}#panel-resumen .overview-metrics{gap:8px}#panel-resumen .overview-metric{padding:14px}#panel-resumen #o-sales{font-size:18px}.app .topbar-project{max-width:230px}.app .topbar-actions .search-trigger{display:inline-flex}.topbar-actions .icon-button{display:none}}
+@media(max-width:600px){
+ .app .topbar{padding:10px 14px;gap:8px}.topbar-left{width:100%;justify-content:space-between;gap:10px}.app-brand strong{font-size:22px}.app-brand .brand-emblem{display:none}.breadcrumb{margin-left:auto;max-width:45%;overflow:hidden;text-overflow:ellipsis}.app .topbar-project{width:100%;max-width:none;margin:0}.topbar-project .project-select{width:100%;height:44px}.app .topbar-actions{gap:6px;justify-content:flex-start}.app .topbar-actions button{min-height:44px;padding-inline:12px}.app .topbar-actions .search-trigger span{display:none}.app .active-file{position:relative;width:100%;order:2}.app .active-file span{font-size:10px;max-width:calc(100vw - 65px)}.app .sidebar-file{display:contents}.app .sidebar-file .btn-secondary{order:0}.app .main-content{padding:18px 14px}.app .scopebar{flex-wrap:wrap;margin-bottom:14px}.app .demo-banner{gap:8px;padding:8px 10px}.app .demo-banner button{white-space:normal;text-align:right}
+ #panel-resumen .view-heading{flex-direction:row;align-items:flex-start;flex-wrap:wrap;gap:8px}#panel-resumen .view-heading h1{font-size:26px}#panel-resumen .overview-intro{font-size:11px}#panel-resumen .overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr));margin:16px 0 20px}#panel-resumen .overview-metric{min-height:104px;padding:14px}#panel-resumen .overview-metric>strong{font-size:26px}#panel-resumen #o-sales{font-size:clamp(15px,4.5vw,24px)}
+ #panel-resumen .map-stats{grid-template-columns:repeat(2,minmax(0,1fr))}#panel-resumen .map-toolbar{padding:10px;gap:8px}#panel-resumen #m-toolbar-info{flex-basis:100%}.shared-map-workspace .map-view-switch button,.shared-map-workspace .map-zoom button{min-width:38px;min-height:44px}.shared-map-workspace .proj-chip,.shared-map-workspace .map-search{min-height:44px}.shared-map-workspace .map-controls>*{max-width:100%}#panel-resumen .map-scroll{height:320px;min-height:320px}#panel-resumen .map-note{padding:10px;font-size:9px}#panel-resumen .map-layout{gap:10px}
+ #panel-resumen .overview-lead{grid-template-columns:minmax(0,1fr)}#panel-resumen .overview-bridge{grid-column:auto;flex-direction:column;align-items:flex-start;gap:10px}#panel-resumen .overview-bottom{grid-template-columns:minmax(0,1fr);padding:14px;gap:22px}.overview-secondary>summary span{display:block;margin:6px 0 0 14px}#panel-resumen .project-list{grid-template-columns:minmax(0,1fr)}
 }
-@media(max-width:520px){
- #panel-resumen .overview-metric{padding:16px;min-height:120px}
- #panel-resumen .overview-metric>strong{font-size:24px}
- #panel-resumen #o-sales{font-size:clamp(15px,4.5vw,22px);white-space:nowrap}
- #panel-resumen .map-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
- #panel-resumen .map-controls>*{max-width:100%}
- #panel-resumen .map-toolbar>*{max-width:100%;overflow-wrap:anywhere}
- .shared-map-workspace .map-view-switch button,.shared-map-workspace .map-zoom button{min-height:44px;min-width:44px}
- .shared-map-workspace .proj-chip,.shared-map-workspace .map-search{min-height:44px}
-}
+@media(prefers-reduced-motion:reduce){.app .panel.active{animation:none}.app .tab,.app .map-svg .mlot{transition:none}}
+@media print{.app.show{display:block}.app #sidebar,.app .topbar{display:none!important}.app .main-content{padding:0}.overview-secondary{display:none}}
+
+
+/* Compact framing keeps the complete model visible at its fitted zoom. */
+.app:has(#panel-resumen.active) .scopebar{display:none}
+#panel-resumen .overview-cockpit .metric-top{justify-content:flex-start}
+#panel-resumen .overview-cockpit .map-controls{flex-wrap:nowrap;align-items:center}
+#panel-resumen #m-proj-chips{display:none}
+#panel-resumen .map-search{flex:1 1 auto;min-width:100px;width:auto;margin:0;height:38px}
+#panel-resumen .map-extra-tools{margin:0;flex-shrink:0;gap:6px}
+#panel-resumen .map-extra-tools button{min-height:38px;font-size:10px;padding-inline:10px}
+#panel-resumen #m-toolbar-info{display:none}
+#panel-resumen .map-toolbar{justify-content:space-between;min-height:54px}
+#panel-resumen .projects-card{padding-top:14px;border:0}
+#panel-resumen .projects-card .card-heading{padding:0;margin-bottom:10px}
+#panel-resumen .project-summary::after,#panel-resumen .project-summary::before{display:none}
+#panel-resumen .project-summary small{margin:0}
+@media(max-width:600px){#panel-resumen .overview-cockpit>.overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}#panel-resumen .overview-cockpit .map-controls{flex-wrap:wrap}#panel-resumen .map-search{flex-basis:100%;height:44px}#panel-resumen .map-extra-tools button{min-height:44px}}
+
+/* Dense framing and a broad architectural projection keep lots prominent. */
+#panel-resumen .overview-intro{display:none}
+#panel-resumen .overview-cockpit .overview-metric{min-height:94px;padding:13px 16px}
+#panel-resumen .overview-cockpit .metric-top{margin-bottom:8px}
+#panel-resumen .overview-operation>.card-heading .card-eyebrow{display:none}
+#panel-resumen .overview-operation h2{margin:0;font-size:18px}
+#panel-resumen .overview-operation>.card-heading{margin-bottom:10px}
+#panel-resumen .map-toolbar{padding:6px 12px;min-height:48px}
+#panel-resumen .map-scroll{height:clamp(340px,42vh,470px);min-height:340px}
+#panel-resumen .map-inspector .tip-status{padding:10px 12px;margin:10px 0;border-radius:4px;font-size:10px}
+#panel-resumen .map-inspector .tip-status b{font-size:19px}
+#panel-resumen .map-inspector .tip-name{margin:8px 0 10px;font-size:18px}
+#panel-resumen #lotInspector dl{font-size:10px;gap:7px;margin:12px 0}
+#panel-resumen .inspector-actions{margin-top:16px}
+body:has(#panel-resumen.active) #m-tip{display:none}
+@media(max-width:600px){#panel-resumen .overview-cockpit .overview-metric{padding:14px;min-height:104px}#panel-resumen .map-scroll{height:320px;min-height:320px}#panel-resumen .map-toolbar{padding:8px 10px}}
+
+/* Keep every report label and the brand visible in the mobile drawer. */
+.app .tab>span:not(.nav-marker){max-width:none!important;opacity:1!important;margin:0;transition:none}
+.app .app-brand strong{display:block!important}
+@media(max-width:600px){.app .topbar-left{gap:8px}.app .breadcrumb{font-size:10px;max-width:38%}.app .app-brand{flex-shrink:0}.app .menu-toggle{margin-left:0}}
+
+/* Missing source fields remain unavailable, rather than implying a zero balance. */
+#panel-resumen .map-svg .mlot.st-unknown{fill:var(--line-strong);stroke:var(--muted)}
+#panel-resumen .map-stats:empty{display:none}
 </style>
 </head>
 <body>
@@ -1561,36 +1611,37 @@ body{font-size:16px}html{overflow-x:clip}
   <button id="sidebarBackdrop" class="sidebar-backdrop" aria-label="Cerrar navegación" hidden></button>
     <header class="topbar">
       <div class="topbar-left"><div class="brand app-brand"><span class="brand-emblem"><img data-brand-logo alt="" width="2048" height="1560" decoding="async" loading="lazy"></span><strong>templer</strong></div><button class="icon-button menu-toggle" id="menuToggle" aria-label="Abrir navegación" aria-expanded="false" aria-controls="sidebar"><svg class="icon"><use href="#i-menu"/></svg></button><span class="breadcrumb"><b id="currentViewName">Visión general</b></span></div>
-      <div class="topbar-actions"><button class="btn-secondary search-trigger" id="searchTrigger" type="button" aria-label="Buscar cliente o lote" title="Buscar cliente o lote"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><span>Buscar</span><kbd>Ctrl K</kbd></button>    <div class="sidebar-file"><div class="active-file"><svg class="icon"><use href="#i-file"/></svg><span id="fileName">—</span></div><small id="loadedMeta">Listo para analizar</small><button id="resetBtn" type="button" aria-label="Cargar otro archivo" title="Cargar otro archivo" class="btn-secondary"><svg class="icon"><use href="#i-upload"/></svg>Cambiar</button></div><button class="icon-button" id="densityToggle" aria-label="Activar vista compacta" aria-pressed="false" title="Cambiar densidad de las tablas"><svg class="icon"><use href="#i-density"/></svg></button><span class="topbar-separator"></span><button class="btn-export xlsx" id="exportXlsxBtn" disabled title="Exportar todos los reportes del proyecto seleccionado a Excel"><svg class="icon"><use href="#i-download"/></svg><span>Excel</span></button><button class="btn-export pdf" id="exportPdfBtn" disabled title="Elegir apartados del proyecto seleccionado para PDF"><svg class="icon"><use href="#i-file"/></svg><span>PDF</span></button></div>
+      <div class="topbar-project"><label class="project-select"><svg class="icon"><use href="#i-building"/></svg><span class="sr-only">Filtrar todos los reportes por proyecto</span><select id="projectFilter"><option value="">Todos los proyectos</option></select></label></div><div class="topbar-actions"><button class="btn-secondary search-trigger" id="searchTrigger" type="button" aria-label="Buscar cliente o lote" title="Buscar cliente o lote"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><span>Buscar</span><kbd>Ctrl K</kbd></button>    <div class="sidebar-file"><div class="active-file"><svg class="icon"><use href="#i-file"/></svg><span id="fileName">—</span></div><small id="loadedMeta">Listo para analizar</small><button id="resetBtn" type="button" aria-label="Cargar otro archivo" title="Cargar otro archivo" class="btn-secondary"><svg class="icon"><use href="#i-upload"/></svg>Cambiar</button></div><button class="icon-button" id="densityToggle" aria-label="Activar vista compacta" aria-pressed="false" title="Cambiar densidad de las tablas"><svg class="icon"><use href="#i-density"/></svg></button><span class="topbar-separator"></span><button class="btn-export xlsx" id="exportXlsxBtn" disabled title="Exportar todos los reportes del proyecto seleccionado a Excel"><svg class="icon"><use href="#i-download"/></svg><span>Excel</span></button><button class="btn-export pdf" id="exportPdfBtn" disabled title="Elegir apartados del proyecto seleccionado para PDF"><svg class="icon"><use href="#i-file"/></svg><span>PDF</span></button></div>
     </header>
-  <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+  <aside class="sidebar" id="sidebar" aria-label="Navegación principal"><div class="sidebar-heading"><span class="card-eyebrow">Espacio de trabajo</span><button type="button" id="sidebarClose" aria-label="Cerrar navegación">×</button></div>
     <nav id="reportNavigation" class="tabs" role="tablist" aria-label="Vistas de reportes" aria-orientation="horizontal"><button type="button" class="tab active" role="tab" id="tab-resumen" data-title="Visión general" data-panel="resumen" aria-controls="panel-resumen" aria-selected="true" tabindex="0"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg><span>Visión general</span><span class="nav-marker">◦</span></button><div class="nav-separator" role="presentation"></div><button type="button" class="tab" role="tab" id="tab-clientes" data-title="Clientes" data-panel="clientes" aria-controls="panel-clientes" aria-selected="false" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg><span>Clientes</span><span class="nav-marker">01</span></button><button type="button" class="tab" role="tab" id="tab-ventas" data-title="Ventas" data-panel="ventas" aria-controls="panel-ventas" aria-selected="false" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg><span>Ventas</span><span class="nav-marker">02</span></button><button type="button" class="tab" role="tab" id="tab-personal" data-title="Personal" data-panel="personal" aria-controls="panel-personal" aria-selected="false" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg><span>Personal</span><span class="nav-marker">03</span></button><button type="button" class="tab" role="tab" id="tab-puente" data-title="Crédito puente" data-panel="puente" aria-controls="panel-puente" aria-selected="false" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-building"/></svg><span>Crédito puente</span><span class="nav-marker">04</span></button><button type="button" class="tab" role="tab" id="tab-saldos" data-title="Saldos por proyecto" data-panel="saldos" aria-controls="panel-saldos" aria-selected="false" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-wallet"/></svg><span>Saldos por proyecto</span><span class="nav-marker">05</span></button><button type="button" class="tab" role="tab" id="tab-mapa" data-title="Plano de lotes" data-panel="mapa" aria-controls="panel-mapa" aria-selected="false" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg><span>Plano de lotes</span><span class="nav-marker">06</span></button></nav>
+    <div class="sidebar-local"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg><span>Tu archivo, en tu navegador<small>Operación inmobiliaria</small></span></div>
   </aside>
     <main id="app-main" class="main-content" tabindex="-1">
       <div id="demoBanner" class="demo-banner" hidden><svg class="icon"><use href="#i-spark"/></svg><span>Datos de ejemplo · Ficticios</span><button type="button" id="exitDemo">Cargar mi archivo</button></div>
-      <div class="scopebar"><div class="scope-title"><span class="live-dot"></span><span id="scopeSummary">Archivo listo</span></div><div class="period-tools" id="periodTools" hidden title="Periodo de escrituración"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg><select id="periodFrom" aria-label="Escrituradas desde"></select><span aria-hidden="true">–</span><select id="periodTo" aria-label="Escrituradas hasta"></select><button type="button" id="periodClear" class="period-clear" aria-label="Quitar periodo" hidden>×</button></div><label class="project-select"><svg class="icon"><use href="#i-building"/></svg><span class="sr-only">Filtrar todos los reportes por proyecto</span><select id="projectFilter"><option value="">Todos los proyectos</option></select></label></div>
+      <div class="scopebar"><div class="scope-title"><span class="live-dot"></span><span id="scopeSummary">Archivo listo</span></div><div class="period-tools" id="periodTools" hidden title="Periodo de escrituración"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg><select id="periodFrom" aria-label="Escrituradas desde"></select><span aria-hidden="true">–</span><select id="periodTo" aria-label="Escrituradas hasta"></select><button type="button" id="periodClear" class="period-clear" aria-label="Quitar periodo" hidden>×</button></div></div>
       <div class="report-tools" id="reportTools" hidden><label class="report-search"><svg class="icon"><use href="#i-search"/></svg><input id="reportSearch" type="search" placeholder="Buscar en las tablas de esta vista…" aria-label="Buscar en las tablas de esta vista"></label><span id="reportSearchResult" role="status"></span></div>
       <section class="panel active" id="panel-resumen" role="tabpanel" aria-labelledby="tab-resumen" tabindex="0">
  <div class="view-heading"><div><h1 id="workspaceTitle" tabindex="-1">Visión general</h1></div><span class="view-period"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span id="overviewTime">Archivo listo</span></span></div>
  <p class="overview-intro">Explora los lotes, consulta su estado y abre el detalle de tu operación.</p>
- <div class="overview-metrics" aria-label="Indicadores de la vista actual">
-  <button type="button" class="overview-metric" id="overviewHomes" data-goto="clientes"><div class="metric-top">Total de viviendas</div><strong id="o-homes">—</strong><small>Registros con LoteID</small></button>
-  <button type="button" class="overview-metric" id="overviewAssigned" data-goto="mapa"><div class="metric-top">Con cliente asignado</div><strong id="o-assigned">—</strong><small>Viviendas de esta vista</small></button>
-  <button type="button" class="overview-metric" id="overviewUnassigned" data-goto="mapa"><div class="metric-top">Sin cliente asignado</div><strong id="o-unassigned">—</strong><small>Viviendas de esta vista</small></button>
-  <button type="button" class="overview-metric" id="overviewSales" data-goto="ventas"><div class="metric-top">Valor con precio de venta</div><strong id="o-sales">—</strong><small id="o-sales-period">Todos los periodos</small></button>
- </div>
  <p id="overviewDataNote" class="overview-data-note" role="status" hidden></p>
+ <div class="overview-cockpit"><div class="overview-metrics" aria-label="Indicadores de la vista actual">
+  <button type="button" class="overview-metric" id="overviewHomes" data-goto="clientes"><div class="metric-top">Viviendas</div><strong id="o-homes">—</strong><small>Registros con LoteID</small></button>
+  <button type="button" class="overview-metric" id="overviewAssigned" data-goto="mapa"><div class="metric-top">Con cliente</div><strong id="o-assigned">—</strong><small>Viviendas de esta vista</small></button>
+  <button type="button" class="overview-metric" id="overviewUnassigned" data-goto="mapa"><div class="metric-top">Sin cliente</div><strong id="o-unassigned">—</strong><small>Viviendas de esta vista</small></button>
+  <button type="button" class="overview-metric" id="overviewSales" data-goto="ventas"><div class="metric-top">Valor de venta</div><strong id="o-sales">—</strong><small id="o-sales-period">Todos los periodos</small></button>
+ </div>
  <section class="overview-operation" aria-labelledby="overviewMapTitle">
   <div class="card-heading"><div><span class="card-eyebrow">Operación por proyecto</span><h2 id="overviewMapTitle">Explora tus lotes</h2><p id="overviewMapScope"></p></div><button type="button" class="text-button" data-goto="mapa">Abrir plano completo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
   <div id="overviewMapHost"></div>
- </section>
+ </section><div id="overviewInspectorHost" class="overview-inspector-host"></div></div>
  <div class="overview-lead">
   <article class="balance-card" id="overviewBalance"><div class="balance-title"><span class="card-eyebrow">Saldo neto de esta vista</span><svg class="icon" aria-hidden="true"><use href="#i-wallet"/></svg></div><div class="balance-number" id="o-net">—</div><div class="balance-split"><div><span><i></i>A cargo</span><strong id="o-cargo">—</strong></div><div><span><i></i>A favor de clientes</span><strong id="o-favor">—</strong></div></div><button class="balance-link" type="button" data-goto="saldos">Ver saldos <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></article>
   <article class="progress-card" id="overviewDeeds"><div class="card-heading"><h3>Avance de escrituración</h3><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg></div><div class="progress-content"><div class="progress-ring"><svg viewBox="0 0 144 144" aria-hidden="true"><circle class="ring-track" cx="72" cy="72" r="60"/><circle class="ring-value" id="overviewRing" cx="72" cy="72" r="60"/></svg><div><strong id="o-percent">—</strong><small>del total</small></div></div><div class="progress-legend"><div><i></i><span>Escrituradas</span><strong id="o-done">—</strong></div><div><i></i><span>Por escriturar</span><strong id="o-pending">—</strong></div></div></div></article>
   <article class="overview-bridge" id="overviewBridge"><span class="card-eyebrow">Crédito puente pendiente</span><strong id="o-bridge">—</strong><p>Saldo de esta vista · todos los periodos</p><button type="button" class="text-button" data-goto="puente">Ver crédito puente <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></article>
  </div>
- <div class="overview-bottom"><article class="activity-card"><div class="card-heading"><h3>Ritmo de escrituración</h3><div class="card-tools"><div class="seg" id="activityMode" role="group" aria-label="Tipo de serie"><button type="button" data-mode="month" aria-pressed="true">Mensual</button><button type="button" data-mode="cum" aria-pressed="false">Acumulado</button></div><button class="text-button" data-goto="personal" type="button">Detalle</button></div></div><div class="chart-wrap"><canvas id="o-activity"></canvas></div></article><article class="attention-card"><div class="card-heading"><h3>Puntos de seguimiento</h3><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></div><div class="attention-list" id="overviewAttention"></div></article></div>
- <article class="projects-card"><div class="card-heading"><div><h3>Proyectos en seguimiento</h3><span id="o-project-count" style="font-size:10px;color:var(--muted);display:block;margin-top:6px"></span></div><button class="text-button" data-goto="saldos" type="button">Saldos</button></div><div class="project-list" id="overviewProjects"></div></article>
+ <details class="overview-secondary"><summary>Actividad y seguimiento <span>Escrituración · alertas · créditos</span></summary><div class="overview-bottom"><article class="activity-card"><div class="card-heading"><h3>Ritmo de escrituración</h3><div class="card-tools"><div class="seg" id="activityMode" role="group" aria-label="Tipo de serie"><button type="button" data-mode="month" aria-pressed="true">Mensual</button><button type="button" data-mode="cum" aria-pressed="false">Acumulado</button></div><button class="text-button" data-goto="personal" type="button">Detalle</button></div></div><div class="chart-wrap"><canvas id="o-activity"></canvas></div></article><article class="attention-card"><div class="card-heading"><h3>Puntos de seguimiento</h3><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></div><div class="attention-list" id="overviewAttention"></div></article></div>
+ </details><article class="projects-card"><div class="card-heading"><div><h3>Proyectos en seguimiento</h3><span id="o-project-count" style="font-size:10px;color:var(--muted);display:block;margin-top:6px"></span></div><button class="text-button" data-goto="saldos" type="button">Saldos</button></div><div class="project-list" id="overviewProjects"></div></article>
 </section>
       <section class="panel" id="panel-clientes" role="tabpanel" aria-labelledby="tab-clientes" tabindex="0" hidden="">
     <div class="report-head">
@@ -2594,7 +2645,7 @@ function layoutMapa(p, {schematic=false}={}){
   return {blocks, rows, seq, park, gaps, x0, x1, y0, y1, cx, bx0, bx1, xL0, xL1, xR0, xR1, sideW, ST, LABEL, BLV, SG, M};
 }
 
-const mapState = {data:null, proj:0, zoom:1, filtros:new Set(['cargo','favor','ok','libre']), query:'', view:'plan', lots:[], selectedId:null};
+const mapState = {data:null, proj:0, zoom:1, filtros:new Set(['cargo','favor','ok','libre']), query:'', view:'perspective', lots:[], selectedId:null};
 const sharedMapWorkspace=document.getElementById('sharedMapWorkspace');
 let mapHost='mapa';
 function mountSharedMap(name){
@@ -2602,14 +2653,31 @@ function mountSharedMap(name){
   const destination=document.getElementById(name==='resumen'?'overviewMapHost':'panel-mapa');
   if(sharedMapWorkspace.parentElement===destination)return;
   destination.appendChild(sharedMapWorkspace);mapHost=name;
+  const inspector=document.querySelector('.map-inspector');
+  (name==='resumen'?document.getElementById('overviewInspectorHost'):sharedMapWorkspace.querySelector('.map-layout')).appendChild(inspector);
   if(mapState.data)drawMapa();
 }
+/* The global project scope is authoritative in the overview. All projects are
+   represented together using the existing manzana/lot geometry and map summaries. */
+function mapStatusAvailable(status){return sessionData.fields.has('nombreCliente')&&(status==='libre'||sessionData.fields.has('saldoEdoCuenta'));}
+function selectDisplayedMapProject(){
+  const projects=mapState.data?.proyectos||[];
+  if(!projects.length)return null;
+  if(mapHost!=='resumen'||projectFilter.value||projects.length===1)return projects[mapState.proj]||projects[0];
+  const lots=projects.flatMap(p=>p.lots),sizes=lots.map(l=>l.size).filter(n=>n>0).sort((a,b)=>a-b);
+  return {nombre:'Todos los proyectos',lots,
+    manzanas:projects.flatMap(p=>p.manzanas.map(m=>({...m,mz:p.nombre+' / '+m.mz}))),
+    medianSize:sizes.length?sizes[Math.floor(sizes.length/2)]:null,
+    conTamano:projects.reduce((n,p)=>n+p.conTamano,0),
+    counts:Object.fromEntries(Object.keys(MAP_STATUS).map(k=>[k,projects.reduce((n,p)=>n+p.counts[k],0)])),
+    montos:{cargo:projects.reduce((n,p)=>n+p.montos.cargo,0),favor:projects.reduce((n,p)=>n+p.montos.favor,0)},aggregate:true};
+}
 function renderOverviewMapScope(){
-  const project=mapState.data?.proyectos[mapState.proj];
-  const scope=projectFilter.value?'Proyecto seleccionado':'Todos los proyectos';
+  const project=selectDisplayedMapProject();
+  document.getElementById('overviewMapTitle').textContent=project?.nombre||'Plano de la operación';
   document.getElementById('overviewMapScope').textContent=project
-    ? `${scope} en los indicadores · Plano: ${project.nombre}. Selecciona otro proyecto para actualizar la vista.`
-    : `${scope} en los indicadores · No hay lotes para representar.`;
+    ? `${project.lots.length.toLocaleString('es-MX')} lotes · ${project.manzanas.length} manzanas · Esquema por registros, sin ubicación geográfica.`
+    : 'No hay identificadores de lote para representar. Los reportes siguen disponibles.';
 }
 
 
@@ -2639,17 +2707,17 @@ function drawMapa(){
     mapState.lots=[];mapState.selectedId=null;resetInspector();updateMapSearchCount();renderOverviewMapScope();
     return;
   }
-  const p = m.proyectos[mapState.proj];
-  document.querySelectorAll('#m-proj-chips .proj-chip').forEach(b=> b.setAttribute('aria-pressed', String(+b.dataset.i===mapState.proj)));
+  const p = selectDisplayedMapProject();
+  document.querySelectorAll('#m-proj-chips .proj-chip').forEach(b=> b.setAttribute('aria-pressed', String(mapHost==='resumen'?projectFilter.value===normHeader(m.proyectos[+b.dataset.i].nombre):+b.dataset.i===mapState.proj)));
 
   // Tarjetas-leyenda (también filtran)
   const detalle = {
-    cargo: fmtMoney(p.montos.cargo),
-    favor: fmtMoney(p.montos.favor),
+    cargo: sessionData.fields.has('saldoEdoCuenta')?fmtMoney(p.montos.cargo):'saldo no disponible',
+    favor: sessionData.fields.has('saldoEdoCuenta')?fmtMoney(p.montos.favor):'saldo no disponible',
     ok: 'sin saldo',
     libre: mapHost==='resumen'?'sin cliente':'disponibles'
   };
-  stats.innerHTML = ['cargo','favor','ok','libre'].map(k=>`
+  stats.innerHTML = ['cargo','favor','ok','libre'].filter(k=>mapHost!=='resumen'||mapStatusAvailable(k)).map(k=>`
     <button type="button" class="legend-chip" data-st="${k}" aria-pressed="${mapState.filtros.has(k)}" title="Mostrar u ocultar en el plano">
       <i class="sw sw-${k}"></i><span class="t">${MAP_STATUS[k].label}</span>
       <strong>${p.counts[k].toLocaleString('es-MX')}<small>${detalle[k]}</small></strong>
@@ -2660,7 +2728,7 @@ function drawMapa(){
   mapState.lots = [];
   const svgStr = buildPlanoSvg(p, L, {schematic});
   canvas.innerHTML = svgStr.svg;
-  mapState.naturalW = svgStr.vw;
+  mapState.naturalW = svgStr.vw;mapState.naturalH=svgStr.vh;
   applyMapZoom();
   applyMapFiltros();
 
@@ -2699,10 +2767,10 @@ function cleanCalle(v){
 function modeOf(arr){ const c = new Map(); arr.forEach(v=>{ if(v) c.set(v, (c.get(v)||0)+1); }); let best = '', n = 0; c.forEach((k,v)=>{ if(k>n){ n=k; best=v; } }); return best; }
 
 function buildPlanoSvg(p, L, {schematic=false}={}){
-  const angle = mapState.view==='plan' ? 0 : PLANO_ANG;
+  const angle = mapState.view==='plan' ? 0 : (schematic?-18*Math.PI/180:PLANO_ANG);
   const shear = mapState.view==='plan' ? 0 : PLANO_SH;
   const cos = Math.cos(angle), sin = Math.sin(angle);
-  const tf = (x,y)=>{ const xs = x + shear*y; return [xs*cos - y*sin, xs*sin + y*cos]; };
+  const tf = (x,y)=>{ const yy=schematic&&mapState.view!=='plan'?y*.50:y; const xs = x + shear*yy; return [xs*cos - yy*sin, xs*sin + yy*cos]; };
   const f = n => n.toFixed(1);
   const pt = (x,y)=>{ const q = tf(x,y); return f(q[0])+','+f(q[1]); };
   const poly = (x,y,w,h)=> [pt(x,y), pt(x+w,y), pt(x+w,y+h), pt(x,y+h)].join(' ');
@@ -2739,7 +2807,7 @@ function buildPlanoSvg(p, L, {schematic=false}={}){
   const bounds=schematic?{left:Math.min(...L.blocks.map(b=>b.x))-18,right:Math.max(...L.blocks.map(b=>b.x+b.w))+18,top:Math.min(...L.blocks.map(b=>b.y))-18,bottom:Math.max(...L.blocks.map(b=>b.y+b.h))+36}:null;
   const corners = (schematic ? [[bounds.left,bounds.top],[bounds.right,bounds.top],[bounds.right,bounds.bottom],[bounds.left,bounds.bottom]] : [[x0-120,y0-90],[x1+90,y0-90],[x1+90,ya+118],[x0-120,ya+118]]).map(([x,y])=>tf(x,y));
   const minX = Math.min(...corners.map(c=>c[0])), maxX = Math.max(...corners.map(c=>c[0]));
-  const minY = Math.min(...corners.map(c=>c[1])), maxY = Math.max(...corners.map(c=>c[1]));
+  const minY = Math.min(...corners.map(c=>c[1]))-6, maxY = Math.max(...corners.map(c=>c[1]))+(schematic?10:0);
   const vw = maxX - minX, vh = maxY - minY;
   let g = `<rect class="ground" x="${f(minX)}" y="${f(minY)}" width="${f(vw)}" height="${f(vh)}"/>`;
 
@@ -2870,14 +2938,19 @@ function buildPlanoSvg(p, L, {schematic=false}={}){
   let lots = '';
   L.blocks.forEach(b=>{
     g += `<polygon class="mz-block" points="${pts(rrect(b.x-2, b.y-2, b.w+4, b.h+4, 4))}"/>`;
-    const nombreMz = /^S\/M/.test(b.mz) ? `Sin manzana ${b.mz.replace('S/M ','')}` : `Manzana ${b.mz}`;
+    const nombreMz = p.aggregate?String(b.mz).replace(' / ',' · Mz. '):(/^S\/M/.test(b.mz) ? `Sin manzana ${b.mz.replace('S/M ','')}` : `Manzana ${b.mz}`);
     g += text(b.x + b.w/2, b.y + b.h + 10, `${nombreMz} · ${b.n} lotes`, 'mz-label', degH);
     b.placed.forEach(pl=>{
       const i = mapState.lots.length;
       mapState.lots.push(pl.l);
       const x = b.x + pl.x, y = b.y + pl.y;
       const cliente = fullName(pl.l.r);
-      lots += `<polygon class="mlot st-${pl.l.status}" data-i="${i}" tabindex="0" points="${poly(x, y, pl.w, pl.h)}" aria-label="Manzana ${escHtml(pl.l.mz)}, lote ${escHtml(pl.l.lt)}: ${escHtml(cliente || 'sin cliente')}, ${MAP_STATUS[pl.l.status].short}"/>`;
+      if(schematic&&mapState.view!=='plan'){
+        const roof=[[x,y],[x+pl.w,y],[x+pl.w,y+pl.h],[x,y+pl.h]].map(([xx,yy])=>tf(xx,yy));
+        const edge=[roof[1],roof[2],roof[3],[roof[3][0],roof[3][1]+5],[roof[2][0],roof[2][1]+5],[roof[1][0],roof[1][1]+5]];
+        lots += `<polygon class="lot-depth" aria-hidden="true" points="${edge.map(q=>f(q[0])+','+f(q[1])).join(' ')}"/>`;
+      }
+      lots += `<polygon class="mlot st-${schematic&&!mapStatusAvailable(pl.l.status)?'unknown':pl.l.status}" data-i="${i}" tabindex="0" points="${poly(x, y, pl.w, pl.h)}" aria-label="${escHtml(proyectoDe(pl.l.r))}, manzana ${escHtml(pl.l.mz)}, lote ${escHtml(pl.l.lt)}: ${escHtml(cliente || 'sin cliente')}, ${schematic&&!mapStatusAvailable(pl.l.status)?'estado no disponible':MAP_STATUS[pl.l.status].short}"/>`;
       if(pl.w >= 12){
         const top = pl.y < b.h/2 - 2;
         const q = tf(x + pl.w/2, top ? y + 9 : y + pl.h - 8);
@@ -2931,7 +3004,7 @@ function buildPlanoSvg(p, L, {schematic=false}={}){
 
   }
   const svg = `<svg class="map-svg" viewBox="${f(minX)} ${f(minY)} ${f(vw)} ${f(vh)}" role="group" aria-label="Plano ${schematic?'esquemático ':''}de ${escHtml(p.nombre)}">${g}</svg>`;
-  return {svg, vw};
+  return {svg, vw, vh};
 }
 
 function applyMapZoom(){
@@ -2939,7 +3012,7 @@ function applyMapZoom(){
   if(!svg) return;
   const sc = document.getElementById('m-scroll');
   const avail = Math.max((sc.clientWidth || 800), 240);
-  const fit = Math.min(avail / (mapState.naturalW || avail), 1.6);
+  const fit = mapHost==='resumen'?Math.min((avail-32)/(mapState.naturalW||avail),Math.max(100,sc.clientHeight-48)/(mapState.naturalH||sc.clientHeight),3.2):Math.min(avail/(mapState.naturalW||avail),1.6);
   svg.style.width = Math.round((mapState.naturalW || avail) * fit * mapState.zoom) + 'px';
   svg.style.margin = mapState.zoom === 1 ? '0 auto' : '0';
   document.getElementById('mapZoomLabel').textContent=Math.round(mapState.zoom*100)+'%';
@@ -2981,12 +3054,12 @@ function mapTipHtml(l){
   if(nonEmpty(r.prototipo)) filas.push(['Prototipo', escHtml(r.prototipo)]);
   if(nonEmpty(r.calle)) filas.push(['Calle', escHtml(r.calle)]);
   if(nonEmpty(r.creditoPlanVentas)) filas.push(['Crédito', escHtml(r.creditoPlanVentas)]);
-  if(st!=='libre') filas.push(['Escrituración', fecha ? escHtml(fecha) : '<span style="color:var(--red)">Pendiente</span>']);
+  if(st!=='libre'&&(mapHost!=='resumen'||sessionData.fields.has('fEstimEscritura'))) filas.push([mapHost==='resumen'?'Escritura estimada':'Escrituración', fecha ? escHtml(fecha) : '<span style="color:var(--red)">Pendiente</span>']);
   const mzTxt = l.sinManzana ? 'Sin manzana' : `Manzana ${escHtml(l.mz)}`;
   return `
     <div class="tip-head"><span>${mzTxt} · Lote ${escHtml(l.lt)}</span><span>${escHtml(r.loteId||'')}</span></div>
     <div class="tip-name${cliente?'':' none'}">${cliente ? escHtml(cliente) : 'Sin cliente asignado'}</div>
-    <div class="tip-status st-${st}">${MAP_STATUS[st].label}${monto ? `<b>${monto}</b>` : ''}</div>
+    <div class="tip-status st-${st}">${mapHost==='resumen'&&!mapStatusAvailable(st)?'Estado no disponible':MAP_STATUS[st].label}${monto ? `<b>${monto}</b>` : ''}</div>
     ${filas.length ? `<dl>${filas.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl>` : ''}`;
 }
 
@@ -3179,6 +3252,7 @@ function selectUnitAssignment(rows){
   const unassigned=units.filter(r=>lotStatus(r)==='libre').length;
   return {assigned:units.length-unassigned,unassigned};
 }
+document.querySelector('.overview-secondary').addEventListener('toggle',event=>{if(event.target.open)requestAnimationFrame(()=>Chart.getChart('o-activity')?.resize());});
 function renderOverview(){
   const put=(id,value)=>document.getElementById(id).textContent=value;
   put('o-net',fmtMoney(lastC.saldoNeto));put('o-cargo',fmtMoney(lastC.creditosPorCobrar));put('o-favor',fmtMoney(Math.abs(lastC.creditosSaldoFavor)));
@@ -3199,7 +3273,7 @@ function renderOverview(){
   document.getElementById('overviewAttention').innerHTML=attention.map(item=>`<button class="attention-item${item.alert&&item.count?' is-alert':''}" type="button" data-goto="${item.panel}"${item.scroll?` data-scroll="${item.scroll}"`:''}><span class="attention-count">${item.count.toLocaleString('es-MX')}</span><span><strong>${item.title}</strong></span>${icon('arrow')}</button>`).join('');
   document.getElementById('overviewProjects').innerHTML=lastS.proyectos.map(project=>{
     const progress=project.total?project.escrituradas/project.total:0;
-    return `<button type="button" class="project-summary" data-project="${escHtml(normHeader(project.nombre))}"><h4>${escHtml(project.nombre)}</h4><span>${project.total} viviendas · ${project.escrituradas} escrituradas</span><div class="project-progress"><i style="width:${Math.max(0,Math.min(progress,1))*100}%"></i></div><small><span>Avance de escrituración</span><b>${fmtPct(progress)}</b></small><strong>${fmtMoney(project.montoCargo)}</strong><small>Saldo a cargo</small></button>`;
+    return `<button type="button" class="project-summary" data-project="${escHtml(normHeader(project.nombre))}"><h4>${escHtml(project.nombre)}</h4>${sessionData.fields.has('loteId')?`<span>${project.total} viviendas${sessionData.fields.has('fEstimEscritura')?' · '+project.escrituradas+' escrituradas':''}</span>`:''}${sessionData.fields.has('loteId')&&sessionData.fields.has('fEstimEscritura')?`<div class="project-progress"><i style="width:${Math.max(0,Math.min(progress,1))*100}%"></i></div><small><span>Avance de escrituración</span><b>${fmtPct(progress)}</b></small>`:''}${sessionData.fields.has('saldoEdoCuenta')?`<strong>${fmtMoney(project.montoCargo)}</strong><small>Saldo a cargo</small>`:''}</button>`;
   }).join('')||'<p class="empty-state">Sin proyectos para mostrar.</p>';
   renderOverviewAvailability();
   activityChart();
@@ -3249,9 +3323,32 @@ document.addEventListener('click',event=>{
   const project=event.target.closest('[data-project]');
   if(project&&!exportBusy){projectFilter.value=project.dataset.project;projectFilter.dispatchEvent(new Event('change'));window.scrollTo({top:0,behavior:calmMotion()?'auto':'smooth'});}
 });
-function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarBackdrop').classList.remove('open');document.getElementById('sidebarBackdrop').hidden=true;document.getElementById('menuToggle').setAttribute('aria-expanded','false');}
-document.getElementById('menuToggle').addEventListener('click',()=>{const open=!document.getElementById('sidebar').classList.contains('open');document.getElementById('sidebar').classList.toggle('open',open);document.getElementById('sidebarBackdrop').hidden=!open;document.getElementById('sidebarBackdrop').classList.toggle('open',open);document.getElementById('menuToggle').setAttribute('aria-expanded',String(open));});
-document.getElementById('sidebarBackdrop').addEventListener('click',closeSidebar);
+const navigationWide=matchMedia('(min-width:1100px)');
+const sidebar=document.getElementById('sidebar'),sidebarBackdrop=document.getElementById('sidebarBackdrop'),menuToggle=document.getElementById('menuToggle');
+function closeSidebar(){
+  const restore=sidebar.classList.contains('open')&&!navigationWide.matches;
+  sidebar.classList.remove('open');sidebarBackdrop.classList.remove('open');sidebarBackdrop.hidden=true;
+  sidebar.hidden=!navigationWide.matches;sidebar.removeAttribute('role');sidebar.removeAttribute('aria-modal');
+  document.getElementById('app-main').inert=false;document.querySelector('.topbar-actions').inert=false;
+  menuToggle.setAttribute('aria-expanded','false');if(restore)menuToggle.focus({preventScroll:true});
+}
+function syncNavigation(){closeSidebar();document.getElementById('reportNavigation').setAttribute('aria-orientation','vertical');}
+menuToggle.addEventListener('click',()=>{
+  if(navigationWide.matches)return;
+  if(sidebar.classList.contains('open')){closeSidebar();return;}
+  sidebar.hidden=false;sidebar.classList.add('open');sidebar.setAttribute('role','dialog');sidebar.setAttribute('aria-modal','true');
+  sidebarBackdrop.hidden=false;sidebarBackdrop.classList.add('open');menuToggle.setAttribute('aria-expanded','true');
+  document.getElementById('app-main').inert=true;document.querySelector('.topbar-actions').inert=true;
+  sidebar.querySelector('.tab.active').focus({preventScroll:true});
+});
+sidebar.addEventListener('keydown',event=>{
+  if(navigationWide.matches||!sidebar.classList.contains('open')||event.key!=='Tab')return;
+  const items=[...sidebar.querySelectorAll('button')].filter(el=>el.tabIndex>=0),first=items[0],last=items.at(-1);
+  if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+});
+document.getElementById('sidebarClose').addEventListener('click',()=>{closeSidebar();menuToggle.focus({preventScroll:true});});
+sidebarBackdrop.addEventListener('click',closeSidebar);navigationWide.addEventListener('change',syncNavigation);syncNavigation();
+
 document.getElementById('densityToggle').addEventListener('click',event=>{const enabled=app.classList.toggle('compact');event.currentTarget.setAttribute('aria-pressed',String(enabled));event.currentTarget.setAttribute('aria-label',enabled?'Activar vista cómoda':'Activar vista compacta');});
 
 /* Tablas: búsqueda, ordenación, paginación y ampliación. El modelo no se modifica. */
@@ -3336,7 +3433,12 @@ document.addEventListener('keydown',event=>{
 });
 
 /* El plano conserva la geometría y el estado; añade planta y ficha persistente. */
-function resetInspector(){document.getElementById('lotInspector').innerHTML='<div class="inspector-empty">'+icon('cursor')+'<strong>Selecciona un lote</strong><p>Haz clic, toca o usa el teclado para consultar sus datos y abrir la ficha completa.</p></div>';}
+function resetInspector(){
+  const p=selectDisplayedMapProject(),fields=sessionData.fields;
+  document.querySelector('.inspector-header strong').textContent='Resumen de proyecto';
+  document.getElementById('lotInspector').innerHTML=p?`<div class="project-inspector"><span class="card-eyebrow">${p.aggregate?'Operación completa':'Proyecto activo'}</span><h3>${escHtml(p.nombre)}</h3><p>Selecciona una vivienda en el modelo para consultar su ficha.</p><div class="inspector-total"><strong>${p.lots.length.toLocaleString('es-MX')}</strong><span>lotes representados</span></div><dl><dt>Manzanas</dt><dd>${p.manzanas.length}</dd>${fields.has('nombreCliente')?`<dt>Sin cliente</dt><dd>${p.counts.libre}</dd>`:''}${fields.has('saldoEdoCuenta')&&fields.has('nombreCliente')?`<dt>Saldo a cargo</dt><dd>${fmtMoney(p.montos.cargo)}</dd><dt>Saldo a favor</dt><dd>${fmtMoney(Math.abs(p.montos.favor))}</dd>`:''}</dl><div class="inspector-actions"><button type="button" class="btn-secondary" data-goto="clientes">Consultar clientes ${icon('arrow')}</button><button type="button" class="text-button" data-goto="ventas">Consultar ventas ${icon('arrow')}</button></div></div>`:'<div class="inspector-empty">'+icon('building')+'<strong>Sin lotes para representar</strong><p>Consulta los registros disponibles en los reportes o importa un archivo con identificadores de lote.</p><button type="button" class="text-button" data-goto="clientes">Consultar registros</button></div>';
+}
+
 function decorateMap(){
   const elements=[...document.querySelectorAll('#m-canvas .mlot')];
   elements.forEach(element=>{element.setAttribute('role','button');element.setAttribute('aria-pressed','false');});
@@ -3354,10 +3456,11 @@ function inspectLot(element){
   mapState.selectedId=lot.r._id;
   document.querySelectorAll('#m-canvas .mlot').forEach(node=>{const selected=node===element;node.classList.toggle('selected',selected);node.setAttribute('aria-pressed',String(selected));});
   const r=lot.r;
-  document.getElementById('lotInspector').innerHTML=mapTipHtml(lot)+`<dl class="inspector-finances"><dt>Proyecto</dt><dd>${escHtml(proyectoDe(r))}</dd><dt>Precio de venta</dt><dd>${r.precioVenta>0?fmtMoney(r.precioVenta):'—'}</dd><dt>Saldo registrado</dt><dd>${r.saldoEdoCuenta==null?'—':fmtMoney(r.saldoEdoCuenta)}</dd></dl><div class="inspector-actions"><button type="button" class="btn-secondary" data-open-rid="${r._id}">Ver ficha completa</button><button type="button" class="text-button" data-show-map-rid="${r._id}">Localizar en plano completo ${icon('arrow')}</button></div>`;
+  document.querySelector('.inspector-header strong').textContent='Vivienda seleccionada';
+  document.getElementById('lotInspector').innerHTML=mapTipHtml(lot)+`<dl class="inspector-finances"><dt>Proyecto</dt><dd>${escHtml(proyectoDe(r))}</dd>${sessionData.fields.has('precioVenta')?`<dt>Precio de venta</dt><dd>${r.precioVenta>0?fmtMoney(r.precioVenta):'—'}</dd>`:''}${sessionData.fields.has('saldoEdoCuenta')?`<dt>Saldo registrado</dt><dd>${r.saldoEdoCuenta==null?'—':fmtMoney(r.saldoEdoCuenta)}</dd>`:''}${nonEmpty(r.fechaDeposito)?`<dt>Fecha de depósito</dt><dd>${escHtml(fmtDate(r.fechaDeposito))}</dd>`:''}</dl><div class="inspector-actions"><button type="button" class="inspector-clear text-button" data-clear-lot>Limpiar selección</button><button type="button" class="btn-secondary" data-open-rid="${r._id}">Ver ficha completa</button><button type="button" class="text-button" data-show-map-rid="${r._id}">Localizar en plano completo ${icon('arrow')}</button></div>`;
 
 }
-document.getElementById('lotInspector').addEventListener('click',event=>{const button=event.target.closest('[data-show-map-rid]');if(button)showOnMap(Number(button.dataset.showMapRid));});
+document.getElementById('lotInspector').addEventListener('click',event=>{if(event.target.closest('[data-clear-lot]')){mapState.selectedId=null;document.querySelectorAll('#m-canvas .mlot').forEach(n=>{n.classList.remove('selected');n.setAttribute('aria-pressed','false');});resetInspector();document.getElementById('m-scroll').focus({preventScroll:true});return;}const button=event.target.closest('[data-show-map-rid]');if(button)showOnMap(Number(button.dataset.showMapRid));});
 document.getElementById('m-canvas').addEventListener('click',event=>{const lot=event.target.closest('.mlot');if(lot)inspectLot(lot);});
 document.querySelectorAll('[data-map-view]').forEach(button=>button.addEventListener('click',()=>{mapState.view=button.dataset.mapView;mapState.zoom=1;document.querySelectorAll('[data-map-view]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));drawMapa();}));
 document.getElementById('mapResetFilters').addEventListener('click',()=>{mapState.query='';mapState.filtros=new Set(['cargo','favor','ok','libre']);document.getElementById('m-search').value='';drawMapa();});
@@ -3370,8 +3473,8 @@ function updateMapSearchCount(){
 document.getElementById('downloadMap').addEventListener('click',()=>{
   const original=document.querySelector('#m-canvas .map-svg');if(!original)return;
   const svg=original.cloneNode(true);svg.setAttribute('xmlns','http://www.w3.org/2000/svg');svg.setAttribute('data-theme','light');svg.style.width='';svg.style.margin='';svg.setAttribute('width',String(Math.ceil(svg.viewBox.baseVal.width)));svg.setAttribute('height',String(Math.ceil(svg.viewBox.baseVal.height)));
-  const style=document.createElementNS('http://www.w3.org/2000/svg','style');style.textContent=document.querySelector('style').textContent;svg.prepend(style);
-  const blob=new Blob([new XMLSerializer().serializeToString(svg)],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='Plano_'+safeName(mapState.data.proyectos[mapState.proj].nombre)+'.svg';link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+  const style=document.createElementNS('http://www.w3.org/2000/svg','style');style.textContent=[...document.querySelectorAll('style')].map(s=>s.textContent).join('\n');svg.prepend(style);
+  const blob=new Blob([new XMLSerializer().serializeToString(svg)],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='Plano_'+safeName(selectDisplayedMapProject().nombre)+'.svg';link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
 });
 if(typeof ResizeObserver!=='undefined'){new ResizeObserver(()=>{if(sharedMapWorkspace.getClientRects().length)applyMapZoom();}).observe(document.getElementById('m-scroll'));}
 
@@ -5276,24 +5379,7 @@ matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>{if(app.
     cleanups.push(()=>{root.classList.remove('motion-cursor-ready');gsap.killTweensOf([cursor,magnet]);gsap.set(magnet,{clearProps:'transform'})});
   }
   /* initMenu: diálogo completo, foco atrapado, Escape y regreso al disparador. */
-  function initMenu(){
-    const overlay=$('#motionMenu'),trigger=$('#menuToggle'),close=$('#motionMenuClose'),list=$('#motionMenuList');
-    const sources=$$('#reportNavigation .tab');list.replaceChildren();
-    sources.forEach((source,i)=>{const item=document.createElement('button');item.type='button';item.className='motion-navitem';
-      const n=document.createElement('small');n.textContent=String(i+1).padStart(2,'0');n.setAttribute('aria-hidden','true');
-      const text=document.createElement('span');text.textContent=source.dataset.title;item.append(n,text);list.append(item);
-      listen(item,'click',()=>{hide();source.click()});
-    });
-    let opened=false;trigger.setAttribute('aria-controls','motionMenu');
-    function hide(restore=true){if(!opened)return;opened=false;gsap.killTweensOf([overlay,...list.children]);overlay.hidden=true;overlay.style.display='';$('#app').inert=false;trigger.setAttribute('aria-expanded','false');unlock('menu');if(restore)trigger.focus({preventScroll:true})}
-    function show(){if(opened)return;opened=true;overlay.hidden=false;overlay.style.display='block';$('#app').inert=true;lock('menu');trigger.setAttribute('aria-expanded','true');
-      gsap.fromTo(overlay,{opacity:0,yPercent:reduced?0:-5},{opacity:1,yPercent:0,duration:reduced?M.duration.fade:M.duration.medium,ease:M.ease.curtain});
-      gsap.fromTo([...list.children],{opacity:0,y:reduced?0:M.intensity.paragraph},{opacity:1,y:0,duration:reduced?M.duration.fade:M.duration.slow,stagger:reduced?0:mobile?M.stagger.mobile:M.stagger.lines,ease:M.ease.in});close.focus({preventScroll:true})}
-    listen(trigger,'click',e=>{e.preventDefault();e.stopImmediatePropagation();opened?hide():show()},true);
-    listen(close,'click',()=>hide());
-    listen(overlay,'keydown',e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();hide()}if(e.key==='Tab'){const items=[close,...list.children],first=items[0],last=items.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
-    window.__templerCloseMotionMenu=hide;cleanups.push(()=>{hide();trigger.setAttribute('aria-controls','sidebar');window.__templerCloseMotionMenu=null});
-  }
+  function initMenu(){ /* Core sidebar owns navigation in every motion mode. */ }
   /* initTransitions: anclas y controles de vistas; conserva los listeners originales. */
   function initTransitions(){
     const curtain=$('#motionCurtain'),curtainTitle=$('#motionCurtainTitle');let replay=false,tl;
@@ -5383,13 +5469,7 @@ matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>{if(app.
     }});observer.observe($('#hero'),{attributes:true,attributeFilter:['class']});cleanups.push(()=>observer.disconnect());
   }
 
-  function initHeader(){
-    if(reduced)return;const header=$('.topbar');let previous=window.scrollY;
-    listen(window,'scroll',()=>{const y=window.scrollY;if(Math.abs(y-previous)<8)return;
-      gsap.to(header,{yPercent:y>previous&&y>160&&!header.contains(document.activeElement)?-110:0,duration:M.duration.fast,ease:M.ease.follow,overwrite:'auto'});previous=y},{passive:true});
-    listen(header,'focusin',()=>gsap.to(header,{yPercent:0,duration:M.duration.fast,ease:M.ease.follow}));
-    cleanups.push(()=>gsap.set(header,{clearProps:'transform'}));
-  }
+  function initHeader(){ /* The dashboard header stays available while exploring. */ }
   function initFooter(){
     let clock=$('#motionClock');if(!clock){clock=document.createElement('time');clock.id='motionClock';clock.className='motion-clock';$('.footer-note').append(clock)}
     const update=()=>{const now=new Date();clock.dateTime=now.toISOString();clock.textContent=now.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})+' · '+Intl.DateTimeFormat().resolvedOptions().timeZone};update();const timer=setInterval(update,60000);cleanups.push(()=>clearInterval(timer));

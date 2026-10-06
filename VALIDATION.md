@@ -1,8 +1,27 @@
-# Validación de la entrega
+# Validación del rediseño V2
 
-Se usó el HTML adjunto como base, porque el repositorio seleccionado no tenía archivos ni commits. Los archivos originales adjuntos se conservaron.
+La implementación utiliza el HTML existente, la especificación V2 y el esquema de composición enviado por el usuario. No se recibió una captura de la referencia.
 
-La última ejecución completa finalizó con **95 checks aprobados** y código de salida 0:
+La ejecución completa terminó con **141 comprobaciones aprobadas**, salida 0 y cero errores no capturados.
+
+## Comprobaciones
+
+La suite valida en Chromium:
+
+- Importaciones efectivas XLSX, XLS y CSV; reimportación y sustitución del ejemplo ficticio de 96 viviendas.
+- KPI de asignación, importes, fechas, acentos y texto que contiene marcado HTML, sin ejecución de ese marcado.
+- Composición de escritorio con navegación persistente, KPI sobre el modelo, ficha a la derecha y plano completo visible al ajustar zoom.
+- Todos los proyectos representados en el esquema general; filtro global que actualiza lotes, KPI, resumen sin selección y finanzas inferiores.
+- Selección por Enter, Espacio y toque; limpieza de selección y restauración del resumen; persistencia entre vistas, perspectiva/planta y cambio de periodo.
+- Búsqueda y filtros de estado, zoom, arrastre, Ctrl + rueda y pellizco de dos dedos.
+- Clientes, Ventas, Personal, Crédito puente, Saldos y Plano; fichas, búsqueda global fuera del proyecto actual y localización en el plano.
+- Exportaciones reales Excel, PDF y SVG; lectura de los totales del libro exportado y texto de las secciones del PDF.
+- Columnas faltantes: KPI omitidos, estado de saldo desconocido, avance no inferido sin fecha; lotes y filas inexistentes sin selección obsoleta.
+- Menú en 1024/768/390/320 px con etiquetas visibles, foco contenido, fondo inactivo y Escape; restauración de barra lateral en 1800 px.
+- Marca visible, ausencia de desbordamiento horizontal, tema oscuro, movimiento reducido y navegación con GSAP/Lenis.
+- Cero errores no capturados del navegador.
+
+Se capturaron los modelos canónicos de la versión anterior publicada con la misma importación CSV. La suite compara todas las filas y los resultados de Clientes, Ventas, Personal, Crédito puente y Saldos; deben coincidir completamente.
 
 ```bash
 cd /workspace/dash
@@ -12,28 +31,14 @@ TEMPLER_BASELINE_MODEL=/tmp/templer-baseline-model.json \
 node tests/operations.cjs
 ```
 
-El parámetro `TEMPLER_BASELINE_MODEL` era una captura de los modelos del HTML original obtenida con la misma importación CSV; es opcional y no se necesita para ejecutar la suite habitual. La comparación completa de filas normalizadas y resultados de Clientes, Ventas, Personal, Crédito puente y Saldos por proyecto pasó sin diferencias.
+La captura de modelos es un artefacto temporal opcional. La suite se puede ejecutar sin ella; la caché de animaciones también es opcional.
 
-Comprobaciones ejecutadas:
-
-- Ejemplo de 96 viviendas, selección global de proyecto y asignación de clientes.
-- Importación efectiva de XLSX, XLS y CSV con acentos, fechas, valores positivos/negativos y nombres que contienen texto HTML; reimportación y salida del ejemplo.
-- Los seis reportes detallados y la vista general siguen accesibles.
-- Selección de lote mediante Enter, Espacio y toque; búsqueda, filtro de estado, zoom, arrastre, Ctrl + rueda y pellizco con dos dedos; selección persistente entre vistas, perspectiva/planta y actualización de periodos.
-- Ficha completa, cierre con Escape, restauración del foco, búsqueda global fuera del proyecto actual y navegación «Ver en el plano».
-- Exportación real Excel, PDF y SVG; lectura del libro exportado y comprobación del texto de las secciones del PDF.
-- Columnas opcionales ausentes y lotes/filas inexistentes; los indicadores no respaldados se omiten y los estados vacíos eliminan selecciones obsoletas.
-- Escritorio, 1024/768/390/320 px sin desbordamiento horizontal, tema oscuro, modo de movimiento reducido y navegación con GSAP/Lenis activos.
-- Cero errores no capturados del navegador.
-
-También se verificó la sintaxis de todos los scripts ejecutables integrados; los paquetes SheetJS, ExcelJS, Chart.js, jsPDF y AutoTable permanecen idénticos al adjunto. Los normalizadores, reglas de estado, cálculos, renderizadores de reportes y generador PDF conservan su implementación original.
-
-El script de instalación se ejecutó dos veces; la segunda confirmó que la instalación era reutilizable. El servidor estático se inició desde `/workspace/dash` y la respuesta HTTP coincide byte por byte con `index.html`. Se guardaron `install_script` y `start_skill` en el borrador del entorno; publicación y restauración en una nueva tarea no se han ejecutado.
+Los cinco paquetes integrados (SheetJS, ExcelJS, Chart.js, jsPDF y AutoTable) se comprobaron idénticos al HTML original adjunto. Los normalizadores, regla de estado, cálculos, renderizadores de reportes detallados y generador PDF permanecen sin cambios. Los nueve scripts ejecutables integrados pasan la verificación de sintaxis. `git diff --check` pasa.
 
 ## Límites
 
-Estas pruebas usan archivos sintéticos; no se recibió un archivo de operaciones real. No constituyen una auditoría completa de accesibilidad con lector de pantalla. La semántica original de **F Estim Escritura** y del alcance de los periodos se conserva y se explica en README.md. El plano general es un esquema, no una representación geográfica.
+Los archivos de prueba son sintéticos; no se recibió un libro de operaciones real. Esta validación no constituye una auditoría completa con lector de pantalla. Se conserva la semántica de fechas y periodos descrita en README.md. La profundidad del plano representa bloques de lotes y no acredita construcción ni ubicación real.
 
-Las librerías opcionales de animación se descargaron con TLS verificado y se suministraron al navegador de pruebas desde esa caché: Chromium de este entorno no reconocía directamente el certificado del proxy para jsDelivr. No se desactivó verificación TLS ni se cambiaron las URLs de la aplicación. Los flujos principales también se comprobaron sin las animaciones externas.
+Las animaciones se sirven al navegador de pruebas desde una caché descargada con TLS verificado, porque Chromium de este entorno no reconoce directamente el certificado del proxy para jsDelivr. No se cambian las URLs de la aplicación ni se desactiva la verificación TLS. Los flujos principales también se comprueban sin estas animaciones.
 
-El código está disponible en la rama `main` de `vazher1304-cyber/dash` en GitHub. La publicación del entorno es un paso independiente y no formó parte de estas pruebas.
+La configuración del entorno de nube guardada anteriormente sigue siendo compatible. Publicar/restaurar el entorno es independiente de publicar el código en GitHub.
