@@ -63,3 +63,35 @@ body { background: var(--scene-bg); color: var(--scene-ink); }
   #panel-resumen .overview-inspector-host { height: auto; }
 }
 @media print { #isometric-scene { display: none; } #dashboard-overlay { pointer-events: auto; } }
+/* The original map stays mounted; one explicit switch restores its presentation. */
+#isometric-scene canvas[hidden],.scene-tools[hidden],.scene-camera-tools[hidden] { display:none; }
+.scene-tools { display:flex; align-items:center; gap:8px; flex-wrap:wrap; pointer-events:auto; }
+.scene-tools button { min-height:36px; font:500 11px var(--font-sans); }
+.scene-camera-tools { display:flex; align-items:center; padding:3px; border-radius:10px;
+  border:var(--glass-border); background:var(--glass-card); backdrop-filter:var(--glass-blur); }
+.scene-camera-tools button { border:0; background:transparent; color:var(--ink); padding:0 10px; border-radius:8px; }
+.scene-camera-tools button:hover { background:var(--blue-soft); }
+.scene-ready #dashboard-overlay #panel-resumen :is(.map-board,.map-scroll) {
+  pointer-events:none; background:none; border-color:transparent; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none;
+}
+.scene-ready #panel-resumen #m-canvas { visibility:hidden; }
+.scene-ready #panel-resumen .map-scroll { overflow:hidden; }
+.scene-ready #panel-resumen .map-scroll::after { content:'Arrastra para explorar · Rueda para acercar';
+  position:absolute; bottom:12px; left:12px; color:#475569; font-size:10px; padding:7px 10px;
+  border-radius:20px; background:rgba(255,255,255,.8); }
+.scene-ready #dashboard-overlay #panel-resumen .map-toolbar,
+.scene-ready #dashboard-overlay #panel-resumen .map-note { background:var(--glass-card); border:var(--glass-border);
+  border-radius:12px; backdrop-filter:var(--glass-blur); }
+.scene-ready #panel-resumen .overview-operation { pointer-events:none; }
+.scene-ready #panel-resumen .overview-operation>.card-heading { pointer-events:none; }
+.scene-ready #panel-resumen .map-scroll { height:clamp(380px,44vh,510px); min-height:380px; }
+.scene-tooltip { position:fixed; z-index:400; width:264px; padding:16px; pointer-events:none;
+  color:var(--scene-ink); background:rgba(255,255,255,.9); border:var(--glass-border); border-radius:16px;
+  backdrop-filter:var(--glass-blur); box-shadow:var(--glass-shadow); font-size:12px; }
+.scene-tooltip[hidden] { display:none; }
+.scene-tooltip-project { margin:0 0 8px; color:var(--scene-muted); font-size:10px; }
+.scene-tooltip dl { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.scene-tooltip dd { margin:0; text-align:right; }
+.scene-ready .motion-cursor { display:none!important; }
+.scene-ready,.scene-ready button,.scene-ready a { cursor:auto!important; }
+@media print { .scene-tools { display:none; } .scene-ready #panel-resumen #m-canvas { visibility:visible; } }
