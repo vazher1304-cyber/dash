@@ -36,4 +36,4 @@ Estas pruebas usan archivos sintéticos; no se recibió un archivo de operacione
 
 Las librerías opcionales de animación se descargaron con TLS verificado y se suministraron al navegador de pruebas desde esa caché: Chromium de este entorno no reconocía directamente el certificado del proxy para jsDelivr. No se desactivó verificación TLS ni se cambiaron las URLs de la aplicación. Los flujos principales también se comprobaron sin las animaciones externas.
 
-Los cambios permanecen locales: no se hicieron commits ni pushes a GitHub, ni se publicó el entorno.
+El código está disponible en la rama `main` de `vazher1304-cyber/dash` en GitHub. La publicación del entorno es un paso independiente y no formó parte de estas pruebas.
