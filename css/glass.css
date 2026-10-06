@@ -1,0 +1,65 @@
+/* Additive presentation layer. The existing reports and controls own behavior. */
+:root,
+:root:not([data-theme=light]) {
+  color-scheme: light;
+  --scene-bg: #EEF2F7;
+  --scene-ink: #0F172A;
+  --scene-muted: #64748B;
+  --scene-accent: #2F6BFF;
+  --scene-success: #34C38F;
+  --glass-card: rgba(255,255,255,.65);
+  --glass-border: 1px solid rgba(255,255,255,.6);
+  --glass-blur: blur(16px) saturate(140%);
+  --glass-shadow: 0 8px 32px rgba(15,23,42,.08);
+  --bg: #EEF2F7; --surface: #fff; --ink: #0F172A; --muted: #64748B;
+  --faint: #64748B; --blue: #2454CC; --blue-dark: #1945AD;
+  --blue-soft: #E5EDFF; --green: #087B55; --red: #B42336;
+  --line: #D8E0EA; --line-strong: #B9C7D8; --fill: #F1F5F9;
+  --hover-surface: #F4F7FF; --glass: rgba(255,255,255,.65);
+  --glass-strong: rgba(255,255,255,.94); --r-card: 16px; --r-ctl: 9px;
+  --chart-grid: #D8E0EA; --chart-neutral: #64748B; --chart-track: #E2E8F0;
+  --row-hover: #EDF3FF; --tint: 15,23,42;
+}
+body { background: var(--scene-bg); color: var(--scene-ink); }
+#isometric-scene { position: fixed; inset: 0; z-index: 0; overflow: hidden;
+  background: radial-gradient(ellipse at 36% 42%,#F9FCFF 0%,#EEF2F7 55%,#E1E9F4 100%); }
+#isometric-scene canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+#dashboard-overlay { position: relative; z-index: 1; pointer-events: none; }
+#dashboard-overlay :is(.hero,.topbar,.sidebar,.kpi,.chart-card,.table-card,.overview-metric,
+  .map-board,.map-inspector,.legend-chip,.balance-card,.progress-card,.overview-bridge,
+  .overview-secondary,.activity-card,.attention-card,.projects-card,.project-summary,
+  .modal-overlay,.palette-overlay,.sheet-overlay,.table-backdrop,.demo-banner,.scopebar,
+  .report-tools,.map-controls,.map-toolbar,.map-note,.sidebar-backdrop,.skip-link,
+  button,a,input,select,summary,[role=button],.scroll-table) { pointer-events: auto; }
+#dashboard-overlay :is(.app .topbar,.app #sidebar,.kpi,.chart-card,.table-card,
+  #panel-resumen .overview-metric,#panel-resumen .map-board,.map-inspector,
+  #panel-resumen .legend-chip,#panel-resumen .balance-card,#panel-resumen .progress-card,
+  #panel-resumen .overview-bridge,.overview-secondary,#panel-resumen .project-summary,
+  .modal-box,.palette,.sheet) {
+  background: var(--glass-card); border: var(--glass-border); border-radius: 16px;
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow); color: var(--scene-ink);
+}
+#dashboard-overlay .app .topbar { border-radius: 0 0 16px 16px; }
+#dashboard-overlay .app #sidebar { border-radius: 0 16px 16px 0; }
+#dashboard-overlay .app .tab { border-radius: 10px; }
+#dashboard-overlay .app .tab.active { color: #1945AD; background: #DFE9FF; box-shadow: inset 3px 0 var(--scene-accent); }
+#dashboard-overlay #panel-resumen .overview-metric { min-height: 100px; }
+#dashboard-overlay #panel-resumen .overview-metric:hover { border-color: var(--scene-accent); }
+#dashboard-overlay :is(.metric-top,.card-eyebrow,.overview-metric>small,.inspector-foot) { color: var(--scene-muted); }
+#dashboard-overlay .progress-ring .ring-value { stroke: var(--scene-success); }
+#dashboard-overlay .project-progress i { background: var(--scene-success); }
+#dashboard-overlay :is(button,a,input,select,[tabindex]):focus-visible { outline: 2px solid #2454CC; outline-offset: 4px; }
+@media(min-width:1024px) {
+  #panel-resumen .overview-cockpit { grid-template-columns: minmax(0,1fr) 320px; gap: 18px; }
+  #panel-resumen .overview-inspector-host { grid-column: 2; grid-row: 1/4; }
+  #panel-resumen .overview-lead { align-items: stretch; }
+}
+/* Tablet/mobile and failed/disabled 3D retain a normal document layout. */
+@media(max-width:767px) {
+  #panel-resumen .overview-cockpit { display: flex; flex-direction: column; }
+  #panel-resumen .overview-cockpit>* { width: 100%; }
+  #panel-resumen .overview-cockpit>.overview-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #panel-resumen .overview-inspector-host { height: auto; }
+}
+@media print { #isometric-scene { display: none; } #dashboard-overlay { pointer-events: auto; } }
