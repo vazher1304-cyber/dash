@@ -42,3 +42,23 @@ Los archivos de prueba son sintéticos; no se recibió un libro de operaciones r
 Las animaciones se sirven al navegador de pruebas desde una caché descargada con TLS verificado, porque Chromium de este entorno no reconoce directamente el certificado del proxy para jsDelivr. No se cambian las URLs de la aplicación ni se desactiva la verificación TLS. Los flujos principales también se comprueban sin estas animaciones.
 
 La configuración del entorno de nube guardada anteriormente sigue siendo compatible. Publicar/restaurar el entorno es independiente de publicar el código en GitHub.
+
+## Validación de la capa isométrica 3D
+
+Resultado final: **471 comprobaciones de navegador aprobadas**:
+
+- `tests/operations.cjs`: **140**, usando `?no3d=1` y la caché de las animaciones originales.
+- `tests/controls.cjs`: **283**, incluyendo cada tabla generada (ordenación, copia, exportación, ampliación y paginación cuando procede), navegación, búsqueda, periodos, leyendas y diálogos.
+- `tests/scene.cjs`: **48**, incluyendo raycasting real, tooltip, selección de la ficha original, umbral de arrastre, sincronización de filtros/importación, cámara, movimiento reducido, instancias, ocultación de pestaña, cambio de tamaño, pérdida de WebGL y liberación/reinicio.
+
+`tests/preservation.cjs` confirma por SHA-256 que quitar únicamente las etiquetas añadidas reproduce **exactamente** el HTML de `cd17d81`: bibliotecas, scripts, estilos, elementos, atributos y enlaces originales. Las comprobaciones de sintaxis de Node y `git diff --check` pasan. No existe comando de build ni lint en este proyecto estático.
+
+La escena usa Three.js **0.170.0** y OrbitControls locales. Los lotes se convierten en losetas y marcadores; las manzanas, en plataformas. Todos provienen del mismo modelo y geometría del plano existente. Su entorno es ilustrativo, sin inventar registros, coordenadas ni estados de construcción.
+
+No se observaron errores ni advertencias de la aplicación. Chromium con GPU por software emitió cuatro avisos propios de lectura de píxeles (`GPU stall due to ReadPixels`).
+
+### Límites adicionales
+
+- La política del navegador administrado bloquea `file://` con `ERR_BLOCKED_BY_ADMINISTRATOR`; no se pudo verificar de extremo a extremo la alternativa 2D de apertura directa. HTTP sí está probado.
+- No se verificaron Safari/Firefox, GPU física, invocaciones del host WebMCP ni archivos de producción.
+- Los callbacks de fallo físico de FileReader, el cierre de ficha mediante deslizamiento nativo y cada región de clic de las gráficas se comprobaron por preservación de código, sin ejercitar todas esas ramas. El detalle de evidencia **B** (navegador) y **S** (fuente preservada) está en `PLAN.md`.

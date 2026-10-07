@@ -28,7 +28,7 @@ export function createScene(host, canvas, context) {
   let active = false, plan = false, disposed = false, elapsed = 0, frame = 0, projectionDirty = true;
   let geometryKey = '', lastWidth = 0, lastHeight = 0;
   const clock = new THREE.Clock(false), events = new AbortController(), opts = { signal: events.signal };
-  const interactions = createInteractions({ camera, canvas, lots, reduced: () => motion.matches, isActive: () => active, aperture });
+  const interactions = createInteractions({ camera, canvas, lots, reduced: () => motion.matches, isActive: () => active && !document.body.classList.contains('overlay-open') && !document.getElementById('app-main').inert, aperture });
   const toolbar = document.createElement('div'); toolbar.className = 'scene-tools'; toolbar.hidden = true;
   toolbar.innerHTML = '<button type="button" class="btn-secondary" data-scene-plan aria-pressed="false">Ver plano 2D</button><div class="scene-camera-tools" role="group" aria-label="Cámara 3D"><button type="button" data-scene-out aria-label="Alejar escena 3D">−</button><button type="button" data-scene-fit>Ajustar 3D</button><button type="button" data-scene-in aria-label="Acercar escena 3D">+</button></div>';
   document.querySelector('.overview-operation>.card-heading').append(toolbar);
@@ -94,6 +94,10 @@ export function createScene(host, canvas, context) {
     elapsed += Math.min(clock.getDelta(),.05);
     bindings.update();
     if (projectionDirty) project();
+    if (active) {
+      lots.animate(elapsed,motion.matches);
+      decoration.prop.position.z = motion.matches ? -10 : Math.sin(elapsed*.12)*10;
+    }
     interactions.update(elapsed);
     if (active) renderer.render(scene,camera);
     frame = requestAnimationFrame(render);

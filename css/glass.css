@@ -95,3 +95,35 @@ body { background: var(--scene-bg); color: var(--scene-ink); }
 .scene-ready .motion-cursor { display:none!important; }
 .scene-ready,.scene-ready button,.scene-ready a { cursor:auto!important; }
 @media print { .scene-tools { display:none; } .scene-ready #panel-resumen #m-canvas { visibility:visible; } }
+@keyframes glass-arrive { from { opacity:0; translate:0 9px; } to { opacity:1; translate:0 0; } }
+@media(prefers-reduced-motion:no-preference) {
+  .app.show #panel-resumen.active :is(.overview-metric,.map-inspector,.balance-card,.progress-card,.overview-bridge) {
+    animation:glass-arrive 260ms ease-out both;
+  }
+  #panel-resumen .overview-metric:nth-child(2) { animation-delay:35ms; }
+  #panel-resumen .overview-metric:nth-child(3) { animation-delay:70ms; }
+  #panel-resumen .overview-metric:nth-child(4) { animation-delay:105ms; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #dashboard-overlay *,#dashboard-overlay *::before,#dashboard-overlay *::after { animation-duration:0s!important; scroll-behavior:auto!important; }
+}
+@media(min-width:1024px) {
+  .scene-ready #panel-resumen .map-toolbar { display:none; }
+  .scene-ready #panel-resumen .map-scroll { height:clamp(240px,calc(100dvh - 700px),440px); min-height:240px; }
+  .scene-ready #panel-resumen .map-note { padding:8px 12px; }
+  .scene-ready #panel-resumen .overview-cockpit { margin-block:14px; }
+  .scene-ready #panel-resumen .overview-lead { margin-top:14px; }
+}
+@media(min-width:1024px) {
+  /* The scope caption already identifies the schematic; full plan notes return in 2D. */
+  .scene-ready #panel-resumen .map-note { display:none; }
+  .scene-ready #panel-resumen .map-scroll { height:max(240px,calc(100dvh - 720px)); }
+  .scene-ready #panel-resumen .legend-chip { display:grid; grid-template-columns:8px 1fr auto; padding:10px; align-items:center; }
+  .scene-ready #panel-resumen .legend-chip strong { font-size:17px; text-align:right; }
+  .scene-ready #panel-resumen .legend-chip strong small { font-size:9px; }
+  .scene-ready #panel-resumen :is(.balance-card,.progress-card,.overview-bridge) { padding:12px 16px; }
+  .scene-ready #panel-resumen .balance-number { margin-top:8px; font-size:24px; }
+  .scene-ready #panel-resumen .balance-split { margin-top:8px; }
+  .scene-ready #panel-resumen .balance-link { margin-top:8px; }
+  .scene-ready #panel-resumen .progress-ring { width:72px; height:72px; flex-basis:72px; }
+}

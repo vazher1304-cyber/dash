@@ -59,3 +59,32 @@ node tests/operations.cjs
 ```
 
 Las pruebas cubren importaciones, datos, navegación, mapa, filtros, fichas, búsqueda, exportaciones, estados incompletos/vacíos, movimiento reducido, tema oscuro, toque y anchos de 320 a 1800 px. Guardan capturas y archivos exportados en una carpeta temporal indicada al terminar. `VALIDATION.md` describe la comprobación de esta entrega.
+
+## Capa isométrica 3D
+
+La vista general añade una escena Three.js **0.170.0** y tarjetas de cristal. Cada lote del plano existente aparece como una loseta con marcador azul; las manzanas usan la misma agrupación y geometría esquemática del plano. No representa coordenadas, construcción ni alturas reales.
+
+Sirve la carpeta completa por HTTP con el comando anterior. Three.js y OrbitControls están incluidos en `js/scene/vendor/`; no se requiere npm ni conexión para la escena. Las bibliotecas y reglas originales de importación y reportes permanecen intactas.
+
+- Selecciona un marcador para abrir la ficha existente; el tooltip usa el mismo formateador del plano.
+- Arrastra para desplazar y usa la rueda o los controles 3D para acercar. La rotación permanece fija en una vista isométrica.
+- **Ver plano 2D** restaura todos los controles, gestos y selección por teclado del plano original. Los reportes detallados mantienen su plano existente.
+- La búsqueda, filtros, importaciones y selección se sincronizan desde el modelo original. Los registros filtrados se atenúan y dejan de ser seleccionables en 3D.
+- Menos de 768 px, WebGL no disponible, pérdida del contexto o `?no3d=1`: fondo degradado y dashboard original con tarjetas de cristal.
+- La apertura directa con `file://` utiliza deliberadamente la alternativa 2D para evitar las restricciones de módulos locales. Esta modalidad no se pudo probar en el navegador administrado del entorno; HTTP sí está verificado.
+- Se respeta movimiento reducido; el render se pausa con la pestaña oculta. `TemplerScene.dispose()` libera la escena y `TemplerScene.init()` permite reiniciarla.
+
+### Verificación de esta capa
+
+No hay comandos de lint ni build: es una aplicación estática. Las pruebas usan la instalación de Playwright de desarrollo existente, sin añadir dependencias de la aplicación:
+
+```bash
+node tests/preservation.cjs
+NODE_PATH=/workspace/.templer-tools/node_modules \
+TEMPLER_CDN_CACHE=/workspace/.templer-tools/cdn \
+TEMPLER_URL='http://127.0.0.1:8000/index.html?no3d=1' node tests/operations.cjs
+NODE_PATH=/workspace/.templer-tools/node_modules node tests/controls.cjs
+NODE_PATH=/workspace/.templer-tools/node_modules node tests/scene.cjs
+```
+
+`PLAN.md` contiene el inventario de selectores, el mapeo de datos y el registro de regresiones. `tests/preservation.cjs` comprueba que, al retirar únicamente las nuevas etiquetas de inicialización y capas, el documento coincide exactamente con la revisión `cd17d81`.

@@ -91,7 +91,7 @@ export function createLots(resources) {
     islands.instanceMatrix.needsUpdate = true;
     [markers, tiles, islands].forEach(mesh => { mesh.computeBoundingSphere(); });
   }
-  function updateEntry(entry, scale = 1, bob = 0) {
+  function updateEntry(entry, scale = 1, bob = entry.bob || 0) {
     const { position: p, index: i } = entry; if (!p) return;
     place(tiles, i, p.x, .15, p.z, entry.width*scale, .15*scale, entry.depth*scale);
     place(markers, i, p.x, .3 + entry.markerSize*.35 + bob, p.z, entry.markerSize*scale, entry.markerSize*scale, entry.markerSize*scale);
@@ -116,6 +116,12 @@ export function createLots(resources) {
   return { group, rebuild, positions, emphasize,
     get targets() { return markers ? [markers, tiles] : []; },
     get entries() { return entries; },
+    animate(time, reduced) {
+      entries.forEach((entry, index) => {
+        entry.bob = reduced || entry.filtered ? 0 : Math.sin(time*.8 + index*.4)*.035;
+        updateEntry(entry);
+      });
+    },
     dispose: clear
   };
 }
